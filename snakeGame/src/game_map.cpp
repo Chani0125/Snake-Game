@@ -64,6 +64,11 @@ int LoadMapFile()
 
 int CreateMap(int map_num)
 {
+    if (map_num >= map.size())
+    {
+        cout << "You "
+        map_num %= map.size();
+    }
     play_map.resize(map[map_num].size(), vector<short>(map[map_num].size(), 2));
     copy(map[map_num].begin(), map[map_num].end(), play_map.begin());
     played_stage_num.push_back(map_num);

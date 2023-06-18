@@ -1,4 +1,3 @@
-// #include <ncurses/ncurses.h>
 #include <ncurses.h>
 #include <iostream>
 #include <vector>
