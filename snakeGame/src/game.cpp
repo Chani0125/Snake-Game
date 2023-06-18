@@ -33,7 +33,8 @@ int main()
         cout << "\n";
     }
 
-
+    int e;
+    cin >> e;
 
     return 0;
 }
