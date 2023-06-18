@@ -12,7 +12,7 @@ class PoisonItem : public Item
 private:
     int poison;
 public:
-    PoisonItem(pair<int, int>);
+    PoisonItem(Point pos);
     ~PoisonItem();
 };
 

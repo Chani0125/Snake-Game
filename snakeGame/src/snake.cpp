@@ -13,7 +13,7 @@ Snake::Snake()
 {
     is_alive = true;
     is_eat_growth = false;
-    direction = 2;
+    direction = SOUTH;
     for (int i = 0; i < 3; i++)
         body.push_back({5-i, 2});
 }
@@ -75,7 +75,8 @@ bool Snake::move(int dir)
     int y = this->body.front().y;
     if (dir > 4)
     {
-        cout << "You input incorrect number over max size! Don't worry. I fixed it!" << "\n";
+        cout << "You input incorrect number over max size!";
+        cout << "Don't worry. I fixed it!" << "\n";
         dir %= 4;
     }
     return move({x-dx[dir], y-dy[dir]});

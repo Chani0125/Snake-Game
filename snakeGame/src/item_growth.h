@@ -12,7 +12,7 @@ class GrowthItem : public Item
 private:
     int growth;
 public:
-    GrowthItem(pair<int, int>);
+    GrowthItem(Point pos);
     ~GrowthItem();
 };
 

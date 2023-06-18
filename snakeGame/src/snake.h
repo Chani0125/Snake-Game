@@ -28,13 +28,12 @@ public:
     Point GetHead();
     bool GetAlive();
     bool GetEatGrowth();
-    
+
     int size();
 
     bool move();
     bool move(Point next_pos);
     bool move(int direction);
-
 
 };
 

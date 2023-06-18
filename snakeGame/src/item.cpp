@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Item::Item(pair<int, int> pos)
+Item::Item(Point pos)
 {
     this->pos = pos;
 }

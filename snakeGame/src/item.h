@@ -1,6 +1,7 @@
 #ifndef _ITEM_
 #define _ITEM_
 
+#include "point.h"
 #include <iostream>
 #include <vector>
 
@@ -9,10 +10,10 @@ using namespace std;
 class Item
 {
 protected:
-    pair<int, int> pos;
+    Point pos;
 
 public:
-    Item(pair<int, int>);
+    Item(Point pos);
     Item();
     ~Item();
     void eaten();

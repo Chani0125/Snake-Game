@@ -84,7 +84,8 @@ int CreateMap(int map_num)
 {
     if (map_num >= map.size())
     {
-        cout << "You input incorrect number over max size! Don't worry. I fixed it!" << "\n";
+        cout << "You input incorrect number over max size!";
+        cout << "Don't worry. I fixed it!" << "\n";
         map_num %= map.size();
     }
     play_map.resize(map[map_num].size(), vector<short>(map[map_num].size(), 2));
