@@ -9,11 +9,13 @@ using namespace std;
 // unit: ms
 int tick = 500;
 
+void InitGame();
+
 int main()
 {
     initscr();
 
-    LoadMapFile();
+    InitGame();
 
     for (int i = 0; i < map.size(); i++)
     {
@@ -33,7 +35,7 @@ int main()
 
     int map_num = CreateMap();
 
-    printw("[Play Map %d]\n", map_num);
+    printw("[Play Map %d]\n", played_stage_history.back());
     for (vector<short> x : play_map)
     {
         for (int y : x)
@@ -47,44 +49,10 @@ int main()
 
     endwin();
     return 0;
+}
 
-    // int num = 0;
-    // LoadMapFile();
-
-    // cout << "[Map Test]" << "\n\n";
-
-    // for (vector<vector<short>> m : map)
-    // {
-    //     cout << "[Map " << num++ << "]" << "\n";
-    //     for (vector<short> x : m)
-    //     {
-    //         for (int y : x)
-    //         {
-    //             cout << y << " ";
-    //         }
-    //         cout << "\n";
-    //     }
-    //     cout << "\n";
-    // }
-
-    // int e;
-
-    // do
-    // {
-    //     int map_num = CreateMap(false);
-    //     cout << "[Play Map " << map_num << "]" << "\n";
-    //     for (vector<short> x : play_map)
-    //     {
-    //         for (int y : x)
-    //         {
-    //             cout << y << " ";
-    //         }
-    //         cout << "\n";
-    //     }
-    //     cout << "\n";
-
-    //     cin >> e;
-    // } while (e);
-
-    // return 0;
+void InitGame()
+{
+    LoadMapFile();
+    CreateMap(0);
 }
