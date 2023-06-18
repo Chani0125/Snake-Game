@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include "item.cpp"
+#include "item.h"
 
 using namespace std;
 
