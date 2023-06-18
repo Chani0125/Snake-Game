@@ -1,29 +1,22 @@
-// #ifndef _ITEM_
-// #define _ITEM_
+#ifndef _ITEM_
+#define _ITEM_
 
-// #include <iostream>
-// #include <vector>
+#include <iostream>
+#include <vector>
 
-// using namespace std;
+using namespace std;
 
-// class Item
-// {
-// protected:
-//     pair<int, int> pos;
+class Item
+{
+protected:
+    pair<int, int> pos;
 
-// public:
-//     Item(pair<int, int>);
-//     ~Item();
-// };
-
-// Item::Item(pair<int, int> pos) : pos(pos)
-// {
-// }
-
-// Item::~Item()
-// {
-// }
+public:
+    Item(pair<int, int>);
+    Item();
+    ~Item();
+    void eaten();
+};
 
 
-
-// #endif
+#endif

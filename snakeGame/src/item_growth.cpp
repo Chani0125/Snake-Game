@@ -1,29 +1,9 @@
-// #ifndef _GROWTH_ITEM_
-// #define _GROWTH_ITEM_
+#include "item_growth.h"
 
-// #include <iostream>
-// #include <vector>
-// #include "item.cpp"
+GrowthItem::GrowthItem(pair<int, int>)
+{
+}
 
-// using namespace std;
-
-// class PoisonItem : public Item
-// {
-// private:
-
-// public:
-//     PoisonItem(pair<int, int>);
-//     ~PoisonItem();
-// };
-
-// PoisonItem::PoisonItem(pair<int, int> pos) : Item(pos)
-// {
-// }
-
-// PoisonItem::~PoisonItem()
-// {
-// }
-
-
-
-// #endif
+GrowthItem::~GrowthItem()
+{
+}
