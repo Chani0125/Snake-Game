@@ -22,7 +22,6 @@ extern vector<vector<short>> play_map;
 extern vector<int> unplayed_stage_num;
 extern vector<int> played_stage_history;
 
-
 int LoadMapFile();
 
 int CreateMap(int map_num);

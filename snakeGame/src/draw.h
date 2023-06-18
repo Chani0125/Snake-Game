@@ -3,6 +3,6 @@
 
 using namespace std;
 
-void draw();
+void Draw();
 
 #endif

@@ -14,10 +14,11 @@ vector<vector<vector<short>>> map;
 vector<vector<short>> play_map;
 
 vector<int> unplayed_stage_num;
-vector<int> played_stage_num;
+vector<int> played_stage_history;
 
 /**
  * @brief   Loading all .txt file in ./map directory to make map
+ * 
  * @return  Number of Opened File
  */
 int LoadMapFile()
@@ -75,7 +76,8 @@ int LoadMapFile()
 }
 
 /**
- * @brief   Load saved map to play_map selected by map_num
+ * @brief           Load saved map to play_map selected by map_num
+ * 
  * @param map_num   Select map by number
  */
 int CreateMap(int map_num)
@@ -87,12 +89,13 @@ int CreateMap(int map_num)
     }
     play_map.resize(map[map_num].size(), vector<short>(map[map_num].size(), 2));
     copy(map[map_num].begin(), map[map_num].end(), play_map.begin());
-    played_stage_num.push_back(map_num);
+    played_stage_history.push_back(map_num);
     return map_num;
 }
 
 /**
- * @brief   Load saved map randomly to play_map
+ * @brief               Load saved map randomly to play_map
+ * 
  * @param is_played_map True(default): load, False: In unplayed map, load
  */
 int CreateMap(bool is_played_map)

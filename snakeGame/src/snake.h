@@ -6,15 +6,19 @@
 
 using namespace std;
 
+/**
+ * @param direction 0: N, 1: E, 2: S, 3: W
+ * @param body      pair: {pos_x, pos_y}
+ */
 class Snake
 {
 private:
     bool alive;
-    int direction; // 1,2,3,4 - north, east, south, west
-    vector<pair<int,int>> body; //row,col
+    int direction;
+    vector<pair<int,int>> body;
 public:
-    Snake(/* args */);
-    pair<int, int> getHead();
+    Snake();
+    pair<int, int> GetHead();
     bool move();
     bool move(pair<int, int>);
     bool move(int direction);

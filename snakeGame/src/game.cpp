@@ -3,6 +3,7 @@
 #include <vector>
 #include <ctime>
 #include "game_map.h"
+#include "draw.h"
 
 using namespace std;
 
@@ -33,19 +34,7 @@ int main()
         clear();
     }
 
-    int map_num = CreateMap();
-
-    printw("[Play Map %d]\n", played_stage_history.back());
-    for (vector<short> x : play_map)
-    {
-        for (int y : x)
-        {
-            printw("%d ", y);
-        }
-        printw("\n");
-    }
-    refresh();
-    getch();
+    Draw();
 
     endwin();
     return 0;
