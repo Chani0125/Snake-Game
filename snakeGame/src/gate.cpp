@@ -5,7 +5,7 @@
 // #include <vector>
 // #include "item.cpp"
 
-// class Gate : public Item
+// class Gate
 // {
 // private:
 //     /* data */

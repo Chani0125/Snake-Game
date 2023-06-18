@@ -11,43 +11,80 @@ int tick = 500;
 
 int main()
 {
-    int num = 0;
+    initscr();
+
     LoadMapFile();
 
-    cout << "[Map Test]" << "\n\n";
-
-    for (vector<vector<short>> m : map)
+    for (int i = 0; i < map.size(); i++)
     {
-        cout << "[Map " << num++ << "]" << "\n";
-        for (vector<short> x : m)
+        printw("[Map %d]\n", i);
+        for (vector<short> x : map[i])
         {
             for (int y : x)
             {
-                cout << y << " ";
+                printw("%d ", y);
             }
-            cout << "\n";
+            printw("\n");
         }
-        cout << "\n";
+        refresh();
+        getch();
+        clear();
     }
 
-    int e;
+    int map_num = CreateMap();
 
-    do
+    printw("[Play Map %d]\n", map_num);
+    for (vector<short> x : play_map)
     {
-        int map_num = CreateMap(false);
-        cout << "[Play Map " << map_num << "]" << "\n";
-            for (vector<short> x : play_map)
-            {
-                for (int y : x)
-                {
-                    cout << y << " ";
-                }
-                cout << "\n";
-            }
-            cout << "\n";
+        for (int y : x)
+        {
+            printw("%d ", y);
+        }
+        printw("\n");
+    }
+    refresh();
+    getch();
 
-        cin >> e;
-    } while (e);
-
+    endwin();
     return 0;
+
+    // int num = 0;
+    // LoadMapFile();
+
+    // cout << "[Map Test]" << "\n\n";
+
+    // for (vector<vector<short>> m : map)
+    // {
+    //     cout << "[Map " << num++ << "]" << "\n";
+    //     for (vector<short> x : m)
+    //     {
+    //         for (int y : x)
+    //         {
+    //             cout << y << " ";
+    //         }
+    //         cout << "\n";
+    //     }
+    //     cout << "\n";
+    // }
+
+    // int e;
+
+    // do
+    // {
+    //     int map_num = CreateMap(false);
+    //     cout << "[Play Map " << map_num << "]" << "\n";
+    //     for (vector<short> x : play_map)
+    //     {
+    //         for (int y : x)
+    //         {
+    //             cout << y << " ";
+    //         }
+    //         cout << "\n";
+    //     }
+    //     cout << "\n";
+
+    //     cin >> e;
+    // } while (e);
+
+    // return 0;
 }

@@ -92,7 +92,7 @@ int CreateMap(int map_num)
 }
 
 /**
- * @brief   Load saved map ramdomly to play_map
+ * @brief   Load saved map randomly to play_map
  * @param is_played_map True(default): load, False: In unplayed map, load
  */
 int CreateMap(bool is_played_map)
