@@ -10,8 +10,8 @@
 
 using namespace std;
 
-vector<vector<vector<int>>> map;
-vector<vector<int>> game_map;
+vector<vector<vector<short>>> map;
+vector<vector<short>> play_map;
 
 vector<int> unplayed_stage_num;
 vector<int> played_stage_num;
@@ -33,12 +33,12 @@ int LoadMapFile()
 
         int x = 0, y = 0;
         string map_str_line;
-        vector<vector<int>> tmp_map;
+        vector<vector<short>> tmp_map;
 
         getline(file, map_str_line);
         y = map_str_line.length();
 
-        vector<int> tmp_map_line(y, 2);
+        vector<short> tmp_map_line(y, 2);
 
         for (int i = 0; i < y; i++)
             tmp_map_line[i] = map_str_line[i] - '0';
@@ -64,8 +64,8 @@ int LoadMapFile()
 
 int CreateMap(int map_num)
 {
-    game_map.resize(map[map_num].size(), vector<int>(map[map_num].size(), 2));
-    copy(map[map_num].begin(), map[map_num].end(), game_map.begin());
+    play_map.resize(map[map_num].size(), vector<short>(map[map_num].size(), 2));
+    copy(map[map_num].begin(), map[map_num].end(), play_map.begin());
     played_stage_num.push_back(map_num);
     return map_num;
 }

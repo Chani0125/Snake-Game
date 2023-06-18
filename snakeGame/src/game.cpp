@@ -14,10 +14,10 @@ int main()
 
     cout << "[Map Test]" << "\n\n";
 
-    for (vector<vector<int>> m : map)
+    for (vector<vector<short>> m : map)
     {
         cout << "[Map " << num++ << "]" << "\n";
-        for (vector<int> x : m)
+        for (vector<short> x : m)
         {
             for (int y : x)
             {
@@ -34,7 +34,7 @@ int main()
     {
         int map_num = CreateMap(false);
         cout << "[Play Map " << map_num << "]" << "\n";
-            for (vector<int> x : game_map)
+            for (vector<short> x : play_map)
             {
                 for (int y : x)
                 {

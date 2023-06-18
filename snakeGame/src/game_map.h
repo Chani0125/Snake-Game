@@ -2,7 +2,6 @@
 #define _GAME_MAP_
 
 #include <vector>
-#include <set>
 
 using namespace std;
 
@@ -12,11 +11,13 @@ using namespace std;
 2: Immune Wall
 3: Snake Head
 4: Snake Body
-5: Item
-6: Gate
+5: Gate
+6: Item_Growth
+7: Item_Poison
+8: Item_Fast_Timer
 */
-extern vector<vector<vector<int>>> map;
-extern vector<vector<int>> game_map;
+extern vector<vector<vector<short>>> map;
+extern vector<vector<short>> play_map;
 
 extern vector<int> unplayed_stage_num;
 extern vector<int> played_stage_history;
