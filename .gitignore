@@ -1,3 +1,5 @@
 /snakeGame/.vscode
 .vscode
 /snakeGame/src/game.exe
+/snakeGame/obj/*
+/snakeGame/game
