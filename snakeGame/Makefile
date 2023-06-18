@@ -1,3 +1,12 @@
+# CC = g++
+
+# SRC_DIR = ./src
+
+# TARGET = game
+
+# $(TARGET) :
+# 	$(CC) -o $(TARGET) $(wildcard $(SRC_DIR)/*.cpp) -lncurses
+
 CC = g++
 
 SRC_DIR = ./src
@@ -14,7 +23,7 @@ $(TARGET) : $(OBJDIRS)
 	$(CC) -o $(TARGET) $(OBJDIRS) -lncurses
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
-	$(CC) -c -o $@ $<
+	$(CC) -c -o $@ $^
 
 clean:
 	rm -f $(OBJDIRS) $(TARGET)

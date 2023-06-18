@@ -1,7 +1,6 @@
 // #ifndef _ITEM_
 // #define _ITEM_
 
-// #include "item.h"
 // #include <iostream>
 // #include <vector>
 

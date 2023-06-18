@@ -1,28 +1,37 @@
 // #include <ncurses/ncurses.h>
 #include <ncurses.h>
 #include <iostream>
+#include <vector>
 #include <ctime>
-#include "map.cpp"
-#include "draw.cpp"
-#include "mission.cpp"
-#include "growthItem.cpp"
-#include "poisonItem.cpp"
-#include "gate.cpp"
+#include "map.h"
+// #include "draw.h"
+// #include "mission.h"
+// #include "growthItem.h"
+// #include "poisonItem.h"
+// #include "gate.h"
 
+using namespace std;
 
 int main()
 {
-    // initscr();
-    
-    // int xMax, yMax;
-    // getmaxyx(stdscr, yMax, xMax);
+    int num = 0;
+    loadMapFile();
 
-    // // WINDOW *board_win  = newwin(20, 20, (yMax / 2) - 10, )
+    cout << "[Map Test]" << "\n\n";
 
-	// refresh();
-
-    // getch();
-    // endwin();
+    for (vector<vector<int>> m : map)
+    {
+        cout << "[Map" << num++ << "]" << "\n";
+        for (vector<int> x : m)
+        {
+            for (int y : x)
+            {
+                cout << y << " ";
+            }
+            cout << "\n";
+        }
+        cout << "\n";
+    }
 
 
 
