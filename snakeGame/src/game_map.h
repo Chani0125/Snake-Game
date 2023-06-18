@@ -12,9 +12,10 @@ using namespace std;
  * 3: Snake Head
  * 4: Snake Body
  * 5: Gate
- * 6: Item_Growth
- * 7: Item_Poison
- * 8: Item_Fast_Timer
+ * 6: Item Growth
+ * 7: Item Poison
+ * 8: Item Fast Timer
+ * 9: Item Slow Timer
  */
 extern vector<vector<vector<short>>> map;
 extern vector<vector<short>> play_map;
