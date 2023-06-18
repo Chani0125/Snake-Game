@@ -16,6 +16,10 @@ vector<vector<short>> play_map;
 vector<int> unplayed_stage_num;
 vector<int> played_stage_num;
 
+/**
+ * @brief   Loading all .txt file in ./map directory to make map
+ * @return  Number of Opened File
+ */
 int LoadMapFile()
 {
     int file_num = 0;
@@ -25,36 +29,44 @@ int LoadMapFile()
     
     while(file.is_open())
     {
+        // Check Correct File
         if (file.eof())
         {
             file_num++;
             continue;
         }
 
+        // x: Map Height, y: Map Width
         int x = 0, y = 0;
         string map_str_line;
         vector<vector<short>> tmp_map;
 
+        // Load Initial Text and Size
         getline(file, map_str_line);
         y = map_str_line.length();
 
         vector<short> tmp_map_line(y, 2);
 
+        // Save Initial Line
         for (int i = 0; i < y; i++)
             tmp_map_line[i] = map_str_line[i] - '0';
         tmp_map.push_back(tmp_map_line); x++;
 
+        // Load until End of File
         while (!file.eof())
         {
             getline(file, map_str_line);
+            // Save Line
             for (int i = 0; i < y; i++)
                 tmp_map_line[i] = map_str_line[i] - '0';
             tmp_map.push_back(tmp_map_line); x++;
         }
 
+        // Save Map Info
         map.push_back(tmp_map);
         unplayed_stage_num.push_back(file_num);
 
+        // Open New File
         file.close();
         file.open(FILENAME(++file_num));
     }
@@ -62,6 +74,10 @@ int LoadMapFile()
     return file_num;
 }
 
+/**
+ * @brief   Load saved map to play_map selected by map_num
+ * @param map_num   Select map by number
+ */
 int CreateMap(int map_num)
 {
     if (map_num >= map.size())
@@ -75,6 +91,10 @@ int CreateMap(int map_num)
     return map_num;
 }
 
+/**
+ * @brief   Load saved map ramdomly to play_map
+ * @param is_played_map True(default): load, False: In unplayed map, load
+ */
 int CreateMap(bool is_played_map)
 {
     int map_num;

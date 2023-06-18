@@ -6,6 +6,9 @@
 
 using namespace std;
 
+// unit: ms
+int tick = 500;
+
 int main()
 {
     int num = 0;
