@@ -38,8 +38,6 @@ int loadMapFile()
             tmp_map_line[i] = map_str_line[i] - '0';
         tmp_map.push_back(tmp_map_line); x++;
 
-
-
         while (!file.eof())
         {
             getline(file, map_str_line);
