@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <unistd.h>
 #include "game_map.h"
 #include "draw.h"
 
@@ -34,7 +35,10 @@ int main()
     //     clear();
     // }
 
-    Draw();
+    while(true){
+        Draw();
+        usleep(tick*1000);
+    }
 
     endwin();
     return 0;

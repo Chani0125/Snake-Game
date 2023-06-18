@@ -37,6 +37,7 @@ void Draw()
         wprintw(playing_map, "\n");
     }
 
+
     wprintw(score_board, "current score");
 
     wprintw(mission_board, "body length\n");
@@ -45,6 +46,6 @@ void Draw()
     wprintw(mission_board, "gate\n");
 
     refresh();
-    delwin(playing_map);
+
     getch();
 }
