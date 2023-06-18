@@ -13,7 +13,9 @@ protected:
 
 public:
     Item(pair<int, int>);
+    Item();
     ~Item();
+    void eaten();
 };
 
 
