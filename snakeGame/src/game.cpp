@@ -18,21 +18,21 @@ int main()
 
     InitGame();
 
-    for (int i = 0; i < map.size(); i++)
-    {
-        printw("[Map %d]\n", i);
-        for (vector<short> x : map[i])
-        {
-            for (int y : x)
-            {
-                printw("%d ", y);
-            }
-            printw("\n");
-        }
-        refresh();
-        getch();
-        clear();
-    }
+    // for (int i = 0; i < map.size(); i++)
+    // {
+    //     printw("[Map %d]\n", i);
+    //     for (vector<short> x : map[i])
+    //     {
+    //         for (int y : x)
+    //         {
+    //             printw("%d ", y);
+    //         }
+    //         printw("\n");
+    //     }
+    //     refresh();
+    //     getch();
+    //     clear();
+    // }
 
     Draw();
 
