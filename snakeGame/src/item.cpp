@@ -1,16 +1,29 @@
-class item
+#ifndef _ITEM_
+#define _ITEM_
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Item
 {
-private:
-    /* data */
+protected:
+    pair<int, int> pos;
+
 public:
-    item(/* args */);
-    ~item();
+    Item(pair<int, int>);
+    ~Item();
 };
 
-item::item(/* args */)
+Item::Item(pair<int, int> pos) : pos(pos)
 {
 }
 
-item::~item()
+Item::~Item()
 {
 }
+
+
+
+#endif
