@@ -3,6 +3,7 @@
 #include <vector>
 #include <ctime>
 #include <unistd.h>
+#include <unistd.h>
 #include "game_map.h"
 #include "draw.h"
 #include "snake.h"
