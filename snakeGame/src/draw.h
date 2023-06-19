@@ -5,7 +5,8 @@ using namespace std;
 
 void ScreenUpdate();
 void SetGameWindow();
-void SetBoard();
+void ScreenMap();
+void ScreenBoard();
 void LoadingScreen();
 void StartScreen();
 void GameOver();

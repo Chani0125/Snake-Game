@@ -17,8 +17,39 @@ WINDOW *playing_map, *score_board, *mission_board;
 void ScreenUpdate()
 {
     clear();
-    SetGameWindow();
 
+    SetGameWindow();
+    ScreenMap();
+    ScreenBoard();
+
+    refresh();
+
+    getch();
+}
+
+void SetGameWindow()
+{
+    start_color();
+
+    playing_map = subwin(stdscr, (MAIN_GAME_H), (MAIN_GAME_W), (START_H), (START_W));
+    init_pair(1, COLOR_RED, COLOR_WHITE);
+    box(playing_map, 0, 0);
+    attron(COLOR_PAIR(1));
+    wbkgd(playing_map, COLOR_PAIR(1));
+
+    score_board = subwin(stdscr, (MAIN_GAME_H / 2 - (1 - (MAIN_GAME_H % 2))), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
+    init_pair(2, COLOR_BLACK, COLOR_GREEN);
+    attron(COLOR_PAIR(2));
+    wbkgd(score_board, COLOR_PAIR(2));
+
+    mission_board = subwin(stdscr, (MAIN_GAME_H / 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2)), (START_W + MAIN_GAME_W + 2));
+    init_pair(2, COLOR_BLACK, COLOR_GREEN);
+    attron(COLOR_PAIR(2));
+    wbkgd(mission_board, COLOR_PAIR(2));
+}
+
+void ScreenMap()
+{
     char element_print;
     for (int i = 0; i < MAP_H; i++)
     {
@@ -47,36 +78,9 @@ void ScreenUpdate()
             // mvwprintw(playing_map, i+1, j*2+1, " %d", play_map[i][j]);
         }
     }
-
-    SetBoard();
-
-    refresh();
-
-    getch();
 }
 
-void SetGameWindow()
-{
-    start_color();
-
-    playing_map = subwin(stdscr, (MAIN_GAME_H), (MAIN_GAME_W), (START_H), (START_W));
-    init_pair(1, COLOR_RED, COLOR_WHITE);
-    box(playing_map, 0, 0);
-    attron(COLOR_PAIR(1));
-    wbkgd(playing_map, COLOR_PAIR(1));
-
-    score_board = subwin(stdscr, (MAIN_GAME_H / 2 - (1 - (MAIN_GAME_H % 2))), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
-    init_pair(2, COLOR_BLACK, COLOR_GREEN);
-    attron(COLOR_PAIR(2));
-    wbkgd(score_board, COLOR_PAIR(2));
-
-    mission_board = subwin(stdscr, (MAIN_GAME_H / 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2)), (START_W + MAIN_GAME_W + 2));
-    init_pair(2, COLOR_BLACK, COLOR_GREEN);
-    attron(COLOR_PAIR(2));
-    wbkgd(mission_board, COLOR_PAIR(2));
-}
-
-void SetBoard()
+void ScreenBoard()
 {
     mvwprintw(score_board, 1, 2, "current score");
 
@@ -119,21 +123,29 @@ void GameOver()
     clear();
     SetGameWindow();
 
-    for (int i = 0; i < MAP_H; i++)
-    {
-        for (int j = 1; j < MAP_W*2+2; j++)
-        {
-            mvwprintw(playing_map, i+1, j, "=");
-            // mvwprintw(playing_map, i+1, j*2+1, " %d", play_map[i][j]);
-        }
-    }
+    // for (int i = 0; i < MAP_H; i++)
+    // {
+    //     for (int j = 1; j < MAP_W*2+2; j++)
+    //     {
+    //         mvwprintw(playing_map, i+1, j, "=");
+    //         // mvwprintw(playing_map, i+1, j*2+1, " %d", play_map[i][j]);
+    //     }
+    // }
+    
+    // mvwprintw(playing_map, MAP_H/2-1, MAP_W-12, "                          ");
+    // mvwprintw(playing_map, MAP_H/2,   MAP_W-12, "        GAME OVER!        ");
+    // mvwprintw(playing_map, MAP_H/2+1, MAP_W-12, "   Press UP key to exit   ");
+    // mvwprintw(playing_map, MAP_H/2+2, MAP_W-12, "                          ");
 
-    mvwprintw(playing_map, MAP_H/2-1, MAP_W-12, "                          ");
-    mvwprintw(playing_map, MAP_H/2,   MAP_W-12, "        GAME OVER!        ");
-    mvwprintw(playing_map, MAP_H/2+1, MAP_W-12, "   Press UP key to exit   ");
-    mvwprintw(playing_map, MAP_H/2+2, MAP_W-12, "                          ");
-
-    SetBoard();
+    ScreenMap();
+    ScreenBoard();
+    
+    mvwprintw(playing_map, MAP_H/2-2, MAP_W-13, " ########################### ");
+    mvwprintw(playing_map, MAP_H/2-1, MAP_W-13, " #                         # ");
+    mvwprintw(playing_map, MAP_H/2,   MAP_W-13, " #       GAME OVER!!       # ");
+    mvwprintw(playing_map, MAP_H/2+1, MAP_W-13, " #  Press UP key to exit.  # ");
+    mvwprintw(playing_map, MAP_H/2+2, MAP_W-13, " #                         # ");
+    mvwprintw(playing_map, MAP_H/2+3, MAP_W-13, " ########################### ");
 
     refresh();
 
