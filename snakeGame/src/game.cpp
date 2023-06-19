@@ -31,13 +31,33 @@ int main()
 
     SetGame();
 
-    // TestGame();
+    TestGame();
 
-    // StartScreen();
-    // LoadingScreen();
+    StartScreen();
+    LoadingScreen();
 
+    int key;
     while (true)
-    {
+    {   
+        clear();
+        // key = getch();
+        // switch (key)
+        // {
+        // case KEY_UP:
+        //     printw("You Press Key: UP\n");
+        //     break;
+        // case KEY_DOWN:
+        //     printw("You Press Key: DOWN\n");
+        //     break;
+        // case KEY_LEFT:
+        //     printw("You Press Key: LEFT\n");
+        //     break;
+        // case KEY_RIGHT:
+        //     printw("You Press Key: RIGHT\n");
+        //     break;
+        // default:
+        //     break;
+        // }
         ScreenUpdate();
         usleep(tick * 1000);
         play_time += tick;
@@ -60,28 +80,23 @@ void SetGame()
 
 void TestGame()
 {
-    char element_print;
-    for (int i = 0; i < MAP_H; i++)
+    int key = getch();
+    switch (key)
     {
-        for (int j = 0; j < MAP_W; j++)
-        {
-            switch (play_map[i][j])
-            {
-            case 0:
-                element_print = ' ';
-                break;
-            case 1:
-            case 2:
-                element_print = '+';
-                break;
-            default:
-                continue;
-            }
-                
-            printf("%c ", element_print);
-        }
-        printf("\r\n");
+    case KEY_UP:
+        mvprintw(10, 35, "You Press Key: UP");
+        break;
+    case KEY_DOWN:
+        mvprintw(10, 35, "You Press Key: DOWN");
+        break;
+    case KEY_LEFT:
+        mvprintw(10, 35, "You Press Key: LEFT");
+        break;
+    case KEY_RIGHT:
+        printw("You Press Key: RIGHT");
+        break;
+    default:
+        break;
     }
-
-    getchar();
+    usleep(tick * 3000);
 }
