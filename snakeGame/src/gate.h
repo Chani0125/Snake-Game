@@ -2,16 +2,17 @@
 #define _GATE_
 
 #include <iostream>
-#include <vector>
+#include "point.h"
 
 using namespace std;
 
 class Gate
 {
 private:
-    /* data */
+    Point pos1, pos2;
 public:
-    Gate(/* args */);
+    Gate();
+    Gate(int x1, int y1, int x2, int y2);
     ~Gate();
 };
 
