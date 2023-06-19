@@ -31,10 +31,10 @@ int main()
 
     SetGame();
 
-    TestGame();
+    // TestGame();
 
-    StartScreen();
-    LoadingScreen();
+    // StartScreen();
+    // LoadingScreen();
 
     int key;
     while (true)
