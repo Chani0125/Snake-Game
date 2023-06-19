@@ -31,7 +31,7 @@ int main()
 
     SetGame();
 
-    // TestGame();
+    TestGame();
 
     // StartScreen();
     // LoadingScreen();
@@ -39,7 +39,7 @@ int main()
     int key;
     while (true)
     {   
-        clear();
+        // clear();
         // key = getch();
         // switch (key)
         // {
@@ -80,23 +80,33 @@ void SetGame()
 
 void TestGame()
 {
+    keypad(stdscr, true);
+
+    mvprintw(10, 25, "Press Key");
+    refresh();
+    usleep(tick * 3000);
+
+    clear();
     int key = getch();
     switch (key)
     {
     case KEY_UP:
-        mvprintw(10, 35, "You Press Key: UP");
+        mvprintw(10, 25, "You Press Key: UP");
         break;
     case KEY_DOWN:
-        mvprintw(10, 35, "You Press Key: DOWN");
+        mvprintw(10, 25, "You Press Key: DOWN");
         break;
     case KEY_LEFT:
-        mvprintw(10, 35, "You Press Key: LEFT");
+        mvprintw(10, 25, "You Press Key: LEFT");
         break;
     case KEY_RIGHT:
-        printw("You Press Key: RIGHT");
+        mvprintw(10, 25, "You Press Key: RIGHT");
         break;
     default:
+        mvprintw(10, 25, "You Press Key: NONE");
         break;
     }
+    refresh();
+
     usleep(tick * 3000);
 }
