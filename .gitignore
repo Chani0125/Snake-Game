@@ -1,5 +1,6 @@
-/snakeGame/.vscode
+snakeGame/.vscode
 .vscode
-/snakeGame/src/game.exe
-/snakeGame/obj/*
-/snakeGame/game
+snakeGame/src/game.exes
+snakeGame/obj/*
+snakeGame/game
+snakeGame/game
