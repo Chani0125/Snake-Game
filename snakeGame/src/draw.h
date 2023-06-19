@@ -5,7 +5,7 @@ using namespace std;
 
 void ScreenUpdate();
 void SetGameWindow();
-void ScreenMap();
+void ScreenMap(char snake_head = 'O');
 void ScreenBoard();
 void LoadingScreen();
 void StartScreen();

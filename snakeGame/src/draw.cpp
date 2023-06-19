@@ -48,7 +48,7 @@ void SetGameWindow()
     wbkgd(mission_board, COLOR_PAIR(2));
 }
 
-void ScreenMap()
+void ScreenMap(char snake_head)
 {
     char element_print;
     for (int i = 0; i < MAP_H; i++)
@@ -65,7 +65,7 @@ void ScreenMap()
                 element_print = '@';
                 break;
             case 3:
-                element_print = 'O';
+                element_print = snake_head;
                 break;
             case 4:
                 element_print = '+';
@@ -137,7 +137,7 @@ void GameOver()
     // mvwprintw(playing_map, MAP_H/2+1, MAP_W-12, "   Press UP key to exit   ");
     // mvwprintw(playing_map, MAP_H/2+2, MAP_W-12, "                          ");
 
-    ScreenMap();
+    ScreenMap('X');
     ScreenBoard();
     
     mvwprintw(playing_map, MAP_H/2-2, MAP_W-13, " ########################### ");
