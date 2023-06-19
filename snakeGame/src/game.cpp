@@ -41,7 +41,10 @@ int main()
     while (true)
     {   
         if(!play_snake.move())
+        {
+            GameOver();
             break;
+        }
         
         ScreenUpdate();
 

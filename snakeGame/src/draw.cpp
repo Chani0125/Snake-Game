@@ -48,12 +48,7 @@ void ScreenUpdate()
         }
     }
 
-    mvwprintw(score_board, 1, 2, "current score");
-
-    mvwprintw(mission_board, 1, 2, "body length\n");
-    mvwprintw(mission_board, 2, 2, "growth\n");
-    mvwprintw(mission_board, 3, 2, "poison\n");
-    mvwprintw(mission_board, 4, 2, "gate\n");
+    SetBoard();
 
     refresh();
 
@@ -81,6 +76,16 @@ void SetGameWindow()
     wbkgd(mission_board, COLOR_PAIR(2));
 }
 
+void SetBoard()
+{
+    mvwprintw(score_board, 1, 2, "current score");
+
+    mvwprintw(mission_board, 1, 2, "body length\n");
+    mvwprintw(mission_board, 2, 2, "growth\n");
+    mvwprintw(mission_board, 3, 2, "poison\n");
+    mvwprintw(mission_board, 4, 2, "gate\n");
+}
+
 void LoadingScreen()
 {
     for (int i = 0; i < 2; i++)
@@ -106,5 +111,31 @@ void StartScreen()
     mvprintw(10, 25, "        Snake Game");
     mvprintw(11, 25, "Press UP key to continue.");
     refresh();
+    while(getch() != KEY_UP);
+}
+
+void GameOver()
+{
+    clear();
+    SetGameWindow();
+
+    for (int i = 0; i < MAP_H; i++)
+    {
+        for (int j = 1; j < MAP_W*2+2; j++)
+        {
+            mvwprintw(playing_map, i+1, j, "=");
+            // mvwprintw(playing_map, i+1, j*2+1, " %d", play_map[i][j]);
+        }
+    }
+
+    mvwprintw(playing_map, MAP_H/2-1, MAP_W-12, "                          ");
+    mvwprintw(playing_map, MAP_H/2,   MAP_W-12, "        GAME OVER!        ");
+    mvwprintw(playing_map, MAP_H/2+1, MAP_W-12, "   Press UP key to exit   ");
+    mvwprintw(playing_map, MAP_H/2+2, MAP_W-12, "                          ");
+
+    SetBoard();
+
+    refresh();
+
     while(getch() != KEY_UP);
 }
