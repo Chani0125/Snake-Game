@@ -9,16 +9,12 @@ extern int tick;
 
 Item::Item(Point pos) : pos(pos)
 {
-    time = 2 * 1000 / tick + 20 + 1;
+    time = (5 * 1000 / tick) + 20 + 1;
 }
 
-Item::Item()
-{
-}
+Item::Item() {}
 
-Item::~Item()
-{
-}
+Item::~Item() {}
 
 bool Item::Check(Point snake_pos)
 {

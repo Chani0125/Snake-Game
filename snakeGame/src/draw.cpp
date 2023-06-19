@@ -14,6 +14,7 @@ using namespace std;
 
 extern int tick;
 extern int play_time;
+extern int num_tick;
 
 WINDOW *playing_map, *score_board, *mission_board;
 
@@ -107,10 +108,11 @@ void ScreenBoard()
 void ScreenScoreBoard()
 {
     mvwprintw(score_board, 1, 2, "[Score Board]");
-    mvwprintw(score_board, 3, 2, "STAGE     : %d", STAGE);
-    mvwprintw(score_board, 4, 2, "TICK      : %d ms", tick);
-    mvwprintw(score_board, 5, 2, "Play Time : %d s", play_time / 1000);
-    mvwprintw(score_board, 6, 2, "Score     : ");
+    mvwprintw(score_board, 3, 2, "STAGE        : %d", STAGE);
+    mvwprintw(score_board, 4, 2, "TICK         : %d ms", tick);
+    mvwprintw(score_board, 5, 2, "Stage Time   : %d s", tick * num_tick / 1000);
+    mvwprintw(score_board, 7, 2, "Play Time    : %d s", play_time / 1000);
+    mvwprintw(score_board, 8, 2, "Score        : ");
 }
 
 void ScreenMissionBoard()

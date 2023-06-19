@@ -66,16 +66,12 @@ int main()
                 break;
             }
 
-            switch (num_tick)
-            {
-            case 0:
-            case 10:
-            case 20:
-                play_items[num_tick/10] = makeItem();
-                break;
-            default:
-                break;
-            }
+            if (num_tick == 0)
+                play_items[0] = makeItem();
+            else if (num_tick == 10 + (3 * 1000 / tick))
+                play_items[1] = makeItem();
+            else if (num_tick == 20 + (6 * 1000 / tick))
+                play_items[2] = makeItem();
 
             for (int i = 0; i < 3; i++)
             {

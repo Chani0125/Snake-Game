@@ -13,6 +13,7 @@ private:
 public:
     Gate();
     Gate(int x1, int y1, int x2, int y2);
+    Gate(Point pos1, Point pos2);
     ~Gate();
 };
 
