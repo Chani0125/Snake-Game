@@ -123,20 +123,6 @@ void GameOver()
     clear();
     SetGameWindow();
 
-    // for (int i = 0; i < MAP_H; i++)
-    // {
-    //     for (int j = 1; j < MAP_W*2+2; j++)
-    //     {
-    //         mvwprintw(playing_map, i+1, j, "=");
-    //         // mvwprintw(playing_map, i+1, j*2+1, " %d", play_map[i][j]);
-    //     }
-    // }
-    
-    // mvwprintw(playing_map, MAP_H/2-1, MAP_W-12, "                          ");
-    // mvwprintw(playing_map, MAP_H/2,   MAP_W-12, "        GAME OVER!        ");
-    // mvwprintw(playing_map, MAP_H/2+1, MAP_W-12, "   Press UP key to exit   ");
-    // mvwprintw(playing_map, MAP_H/2+2, MAP_W-12, "                          ");
-
     ScreenMap('X');
     ScreenBoard();
     
