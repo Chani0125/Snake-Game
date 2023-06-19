@@ -1,4 +1,5 @@
 #include "game_map.h"
+#include "trim.h"
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
@@ -44,6 +45,7 @@ int LoadMapFile()
 
         // Load Initial Text and Size
         getline(file, map_str_line);
+        map_str_line = trim(map_str_line);
         y = map_str_line.length();
 
         vector<short> tmp_map_line(y, 2);
@@ -57,6 +59,7 @@ int LoadMapFile()
         while (!file.eof())
         {
             getline(file, map_str_line);
+            map_str_line = trim(map_str_line);
             // Save Line
             for (int i = 0; i < y; i++)
                 tmp_map_line[i] = map_str_line[i] - '0';
