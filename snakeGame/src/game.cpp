@@ -119,20 +119,20 @@ Item* makeItem()
 
     Item* ans = nullptr;
 
-    int item_type = rand() % 2;
+    int item_type = rand() % 4;
     switch (item_type)
     {
     case 0:
+    case 1:
+    case 2:
         ans = new GrowthItem(*it);
         break;
-    case 1:
+    case 3:
         ans = new PoisonItem(*it);
         break;
     default:
         break;
     }
-
-    // play_map[(*it).x][(*it).y] = 6 + item_type;
 
     play_map_point[0].erase(it);
 
