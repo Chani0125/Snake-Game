@@ -7,6 +7,7 @@
 #include "draw.h"
 #include "snake.h"
 #include "item.h"
+#include "gate.h"
 
 #define NUM_ITEM 3
 
@@ -26,6 +27,7 @@ int main()
 
     Snake play_snake;
     vector<Item> play_items;
+    // Gate play_gate;
 
     SetGame();
 
@@ -34,7 +36,6 @@ int main()
     StartScreen();
     LoadingScreen();
 
-    int key;
     while (true)
     {   
         usleep(tick * 1000);

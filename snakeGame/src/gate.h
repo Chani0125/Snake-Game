@@ -1,25 +1,24 @@
-// #ifndef _GATE_
-// #define _GATE_
+#ifndef _GATE_
+#define _GATE_
 
-// #include <iostream>
-// #include <vector>
-// #include "item.cpp"
+#include <iostream>
+#include <vector>
 
-// class Gate
-// {
-// private:
-//     /* data */
-// public:
-//     Gate(/* args */);
-//     ~Gate();
-// };
+class Gate
+{
+private:
+    /* data */
+public:
+    Gate(/* args */);
+    ~Gate();
+};
 
-// Gate::Gate(/* args */)
-// {
-// }
+Gate::Gate(/* args */)
+{
+}
 
-// Gate::~Gate()
-// {
-// }
+Gate::~Gate()
+{
+}
 
-// #endif
+#endif
