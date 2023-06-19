@@ -68,7 +68,22 @@ void ScreenMap(char snake_head)
                 element_print = snake_head;
                 break;
             case 4:
+                element_print = 'o';
+                break;
+            case 5:
+                element_print = 'G';
+                break;
+            case 6:
                 element_print = '+';
+                break;
+            case 7:
+                element_print = '+';
+                break;
+            case 8:
+                element_print = 'S';
+                break;
+            case 9:
+                element_print = 'F';
                 break;
             default:
                 continue;

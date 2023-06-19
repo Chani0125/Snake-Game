@@ -10,7 +10,6 @@ using namespace std;
 class GrowthItem : public Item
 {
 private:
-    int growth;
 public:
     GrowthItem(Point pos);
     ~GrowthItem();

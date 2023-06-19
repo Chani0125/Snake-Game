@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <iostream>
+#include <cstdlib>
 #include <vector>
 #include <ctime>
 #include <unistd.h>
@@ -25,11 +26,6 @@ int main()
 {
     InitGame();
 
-    Snake play_snake;
-    vector<Item> play_items;
-    Gate play_gate;
-
-    SetGame();
 
     // TestGame();
 
@@ -38,18 +34,31 @@ int main()
 
     SetGameWindow();
 
+    bool snake_live = true;
     while (true)
     {   
-        if(!play_snake.move())
-        {
-            GameOver();
-            break;
-        }
+        // if (!snake_live)
+        //     break;
         
-        ScreenUpdate();
+        SetGame();
+        
+        Snake play_snake;
+        vector<Item> play_items;
+        Gate play_gate;
 
-        usleep(tick * 1000);
-        play_time += tick;
+        while (true)
+        {   
+            if(!(snake_live = play_snake.move()))
+            {
+                GameOver();
+                break;
+            }
+            
+            ScreenUpdate();
+            usleep(tick * 1000);
+            play_time += tick;
+        }
+
     }
 
     endwin();
@@ -58,6 +67,8 @@ int main()
 
 void InitGame()
 {
+    srand(time(NULL));
+
     LoadMapFile();
     CreateMap(0);
 
@@ -70,7 +81,7 @@ void InitGame()
 
 void SetGame()
 {
-
+    CreateMap(0);
 }
 
 void TestGame()
