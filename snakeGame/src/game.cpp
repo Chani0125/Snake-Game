@@ -64,7 +64,6 @@ int main()
                 GameOver();
                 break;
             }
-            
 
             if (num_tick == 0)
                 play_items[0] = makeItem();
@@ -85,6 +84,11 @@ int main()
                     delete play_items[i];
                     play_items[i] = makeItem();
                 }
+            }
+
+            if (play_gate != nullptr)
+            {
+                play_gate->Check(play_snake.GetHead());
             }
 
             ScreenUpdate();

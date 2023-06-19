@@ -32,7 +32,11 @@ bool Gate::Check(Point snake_pos)
     {
         snake_passing = true;
     }
-    return --time;
+
+    if (!snake_passing)
+        time--;
+        
+    return time;
 }
 
 void Gate::Show()
