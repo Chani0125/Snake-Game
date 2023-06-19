@@ -14,7 +14,10 @@ Item::Item(Point pos) : pos(pos)
 
 Item::Item() {}
 
-Item::~Item() {}
+Item::~Item()
+{
+    play_map_point[0].insert(pos);
+}
 
 bool Item::Check(Point snake_pos)
 {
@@ -30,7 +33,7 @@ void Item::Show()
 
 void Item::Hide()
 {
-    play_map[pos.x][pos.y] = game_map[PLAYING_MAP][pos.x][pos.y];
+    play_map[pos.x][pos.y] = 0;
 }
 
 void Item::Hide(Point snake_pos)
