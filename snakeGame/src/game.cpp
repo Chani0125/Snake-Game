@@ -42,7 +42,9 @@ int main()
     {   
         if(!play_snake.move())
             break;
+        
         ScreenUpdate();
+
         usleep(tick * 1000);
         play_time += tick;
     }

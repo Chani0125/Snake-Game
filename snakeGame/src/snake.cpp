@@ -47,41 +47,51 @@ int Snake::size() { return body.size(); }
  */
 bool Snake::move(Point next_pos)
 {
-    Hide();
-
     body.insert(body.begin(), next_pos);
 
     int next_pos_map = play_map[next_pos.x][next_pos.y];
+
+    Hide();
 
     if (next_pos_map != 6)
     {
         body.pop_back();
     }
 
+    switch (next_pos_map)
+    {
     // Case: Wall, Immune Wall, Snake Body
-    if (next_pos_map == 1 || next_pos_map == 2 || next_pos_map == 4)
+    case 1:
+    case 2:
+    case 4:
         is_alive = false;
-    else if (next_pos_map == 5) // Case: Gate
-    {
-
-    }
-    else if (next_pos_map == 6) // Case: Item Growth
-    {
-
-    }
-    else if (next_pos_map == 7) // Case: Item Poison
-    {
+        break;
+    
+    // Case: Gate
+    case 5:
+        break;
+    
+    // Case: Item Growth
+    case 6:
+        break;
+    
+    // Case: Item Poison
+    case 7:
         body.pop_back();
         if (body.size() < 3)
             is_alive = false;
-    }
-    else if (next_pos_map == 8) // Case: Item Fast Timer
-    {
-        
-    }
-    else if (next_pos_map == 9) // Case: Item Slow Timer
-    {
-
+        break;
+    
+    // Case: Item Fast Timer
+    case 8:
+        break;
+    
+    // Case: Item Slow Timer
+    case 9:
+        break;
+    
+    default:
+        break;
     }
 
     Show();
