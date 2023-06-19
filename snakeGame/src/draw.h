@@ -4,6 +4,7 @@
 using namespace std;
 
 void ScreenUpdate();
+void SetGameWindow();
 void LoadingScreen();
 void StartScreen();
 

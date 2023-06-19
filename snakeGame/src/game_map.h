@@ -3,8 +3,9 @@
 
 #include <vector>
 
-#define MAP_H   play_map.size()
-#define MAP_W   play_map[0].size()
+#define MAP_H       play_map.size()
+#define MAP_W       play_map[0].size()
+#define PLAYING_MAP played_stage_history.back()
 
 using namespace std;
 
@@ -20,7 +21,7 @@ using namespace std;
  * 8: Item Fast Timer
  * 9: Item Slow Timer
  */
-extern vector<vector<vector<short>>> map;
+extern vector<vector<vector<short>>> game_map;
 extern vector<vector<short>> play_map;
 
 extern vector<int> unplayed_stage_num;

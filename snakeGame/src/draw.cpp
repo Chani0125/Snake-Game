@@ -12,32 +12,16 @@
 
 using namespace std;
 
+WINDOW *playing_map, *score_board, *mission_board;
+
 void ScreenUpdate()
 {
     clear();
-
-    start_color();
-
-    WINDOW *playing_map = subwin(stdscr, (MAIN_GAME_H), (MAIN_GAME_W), (START_H), (START_W));
-    init_pair(1, COLOR_RED, COLOR_WHITE);
-    box(playing_map, 0, 0);
-    attron(COLOR_PAIR(1));
-    wbkgd(playing_map, COLOR_PAIR(1));
-
-    WINDOW *score_board = subwin(stdscr, (MAIN_GAME_H / 2 - (1 - (MAIN_GAME_H % 2))), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
-    init_pair(2, COLOR_BLACK, COLOR_GREEN);
-    attron(COLOR_PAIR(2));
-    wbkgd(score_board, COLOR_PAIR(2));
-
-    WINDOW *mission_board = subwin(stdscr, (MAIN_GAME_H / 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2)), (START_W + MAIN_GAME_W + 2));
-    init_pair(2, COLOR_BLACK, COLOR_GREEN);
-    attron(COLOR_PAIR(2));
-    wbkgd(mission_board, COLOR_PAIR(2));
+    SetGameWindow();
 
     char element_print;
     for (int i = 0; i < MAP_H; i++)
     {
-        // wmove(playing_map, 1 + i, 2);
         for (int j = 0; j < MAP_W; j++)
         {
             switch (play_map[i][j])
@@ -47,16 +31,20 @@ void ScreenUpdate()
                 break;
             case 1:
             case 2:
+                element_print = '@';
+                break;
+            case 3:
+                element_print = '*';
+            case 4:
                 element_print = '+';
                 break;
             default:
                 continue;
             }
-            
-            // wprintw(playing_map, "%c", play_map[i][j] + '0');
             mvwprintw(playing_map, i+1, j*2+1, " %c", element_print);
+
+            // mvwprintw(playing_map, i+1, j*2+1, " %d", play_map[i][j]);
         }
-        // wprintw(playing_map, "\n");
     }
 
     mvwprintw(score_board, 1, 2, "current score");
@@ -69,6 +57,27 @@ void ScreenUpdate()
     refresh();
 
     getch();
+}
+
+void SetGameWindow()
+{
+    start_color();
+
+    playing_map = subwin(stdscr, (MAIN_GAME_H), (MAIN_GAME_W), (START_H), (START_W));
+    init_pair(1, COLOR_RED, COLOR_WHITE);
+    box(playing_map, 0, 0);
+    attron(COLOR_PAIR(1));
+    wbkgd(playing_map, COLOR_PAIR(1));
+
+    score_board = subwin(stdscr, (MAIN_GAME_H / 2 - (1 - (MAIN_GAME_H % 2))), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
+    init_pair(2, COLOR_BLACK, COLOR_GREEN);
+    attron(COLOR_PAIR(2));
+    wbkgd(score_board, COLOR_PAIR(2));
+
+    mission_board = subwin(stdscr, (MAIN_GAME_H / 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2)), (START_W + MAIN_GAME_W + 2));
+    init_pair(2, COLOR_BLACK, COLOR_GREEN);
+    attron(COLOR_PAIR(2));
+    wbkgd(mission_board, COLOR_PAIR(2));
 }
 
 void LoadingScreen()
