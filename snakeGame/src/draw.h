@@ -4,7 +4,11 @@
 using namespace std;
 
 void ScreenUpdate();
+void SetGameWindow();
+void ScreenMap(char snake_head = 'O');
+void ScreenBoard();
 void LoadingScreen();
 void StartScreen();
+void GameOver();
 
 #endif

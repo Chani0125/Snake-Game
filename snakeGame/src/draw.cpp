@@ -12,32 +12,47 @@
 
 using namespace std;
 
+WINDOW *playing_map, *score_board, *mission_board;
+
 void ScreenUpdate()
 {
     clear();
 
+    SetGameWindow();
+    ScreenMap();
+    ScreenBoard();
+
+    refresh();
+
+    getch();
+}
+
+void SetGameWindow()
+{
     start_color();
 
-    WINDOW *playing_map = subwin(stdscr, (MAIN_GAME_H), (MAIN_GAME_W), (START_H), (START_W));
+    playing_map = subwin(stdscr, (MAIN_GAME_H), (MAIN_GAME_W), (START_H), (START_W));
     init_pair(1, COLOR_RED, COLOR_WHITE);
     box(playing_map, 0, 0);
     attron(COLOR_PAIR(1));
     wbkgd(playing_map, COLOR_PAIR(1));
 
-    WINDOW *score_board = subwin(stdscr, (MAIN_GAME_H / 2 - (1 - (MAIN_GAME_H % 2))), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
+    score_board = subwin(stdscr, (MAIN_GAME_H / 2 - (1 - (MAIN_GAME_H % 2))), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
     init_pair(2, COLOR_BLACK, COLOR_GREEN);
     attron(COLOR_PAIR(2));
     wbkgd(score_board, COLOR_PAIR(2));
 
-    WINDOW *mission_board = subwin(stdscr, (MAIN_GAME_H / 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2)), (START_W + MAIN_GAME_W + 2));
+    mission_board = subwin(stdscr, (MAIN_GAME_H / 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2)), (START_W + MAIN_GAME_W + 2));
     init_pair(2, COLOR_BLACK, COLOR_GREEN);
     attron(COLOR_PAIR(2));
     wbkgd(mission_board, COLOR_PAIR(2));
+}
 
+void ScreenMap(char snake_head)
+{
     char element_print;
     for (int i = 0; i < MAP_H; i++)
     {
-        // wmove(playing_map, 1 + i, 2);
         for (int j = 0; j < MAP_W; j++)
         {
             switch (play_map[i][j])
@@ -47,28 +62,47 @@ void ScreenUpdate()
                 break;
             case 1:
             case 2:
+                element_print = '@';
+                break;
+            case 3:
+                element_print = snake_head;
+                break;
+            case 4:
+                element_print = 'o';
+                break;
+            case 5:
+                element_print = 'G';
+                break;
+            case 6:
                 element_print = '+';
+                break;
+            case 7:
+                element_print = '+';
+                break;
+            case 8:
+                element_print = 'S';
+                break;
+            case 9:
+                element_print = 'F';
                 break;
             default:
                 continue;
             }
-            
-            // wprintw(playing_map, "%c", play_map[i][j] + '0');
             mvwprintw(playing_map, i+1, j*2+1, " %c", element_print);
-        }
-        // wprintw(playing_map, "\n");
-    }
 
+            // mvwprintw(playing_map, i+1, j*2+1, " %d", play_map[i][j]);
+        }
+    }
+}
+
+void ScreenBoard()
+{
     mvwprintw(score_board, 1, 2, "current score");
 
     mvwprintw(mission_board, 1, 2, "body length\n");
     mvwprintw(mission_board, 2, 2, "growth\n");
     mvwprintw(mission_board, 3, 2, "poison\n");
     mvwprintw(mission_board, 4, 2, "gate\n");
-
-    refresh();
-
-    getch();
 }
 
 void LoadingScreen()
@@ -96,5 +130,25 @@ void StartScreen()
     mvprintw(10, 25, "        Snake Game");
     mvprintw(11, 25, "Press UP key to continue.");
     refresh();
+    while(getch() != KEY_UP);
+}
+
+void GameOver()
+{
+    clear();
+    SetGameWindow();
+
+    ScreenMap('X');
+    ScreenBoard();
+    
+    mvwprintw(playing_map, MAP_H/2-2, MAP_W-13, " ########################### ");
+    mvwprintw(playing_map, MAP_H/2-1, MAP_W-13, " #                         # ");
+    mvwprintw(playing_map, MAP_H/2,   MAP_W-13, " #       GAME OVER!!       # ");
+    mvwprintw(playing_map, MAP_H/2+1, MAP_W-13, " #  Press UP key to exit.  # ");
+    mvwprintw(playing_map, MAP_H/2+2, MAP_W-13, " #                         # ");
+    mvwprintw(playing_map, MAP_H/2+3, MAP_W-13, " ########################### ");
+
+    refresh();
+
     while(getch() != KEY_UP);
 }

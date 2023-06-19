@@ -4,10 +4,7 @@
 
 using namespace std;
 
-Item::Item(Point pos)
-{
-    this->pos = pos;
-}
+Item::Item(Point pos) : pos(pos) {}
 
 Item::Item()
 {

@@ -2,6 +2,7 @@
 
 GrowthItem::GrowthItem(Point pos) : Item(pos)
 {
+    
 }
 
 GrowthItem::~GrowthItem()

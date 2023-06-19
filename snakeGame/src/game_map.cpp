@@ -11,14 +11,14 @@
 
 using namespace std;
 
-vector<vector<vector<short>>> map;
+vector<vector<vector<short>>> game_map;
 vector<vector<short>> play_map;
 
 vector<int> unplayed_stage_num;
 vector<int> played_stage_history;
 
 /**
- * @brief   Loading all .txt file in ./map directory to make map
+ * @brief   Loading all .txt file in ./map directory to make game_map
  * 
  * @return  Number of Opened File
  */
@@ -67,7 +67,7 @@ int LoadMapFile()
         }
 
         // Save Map Info
-        map.push_back(tmp_map);
+        game_map.push_back(tmp_map);
         unplayed_stage_num.push_back(file_num);
 
         // Open New File
@@ -79,35 +79,35 @@ int LoadMapFile()
 }
 
 /**
- * @brief           Load saved map to play_map selected by map_num
+ * @brief           Load saved game_map to play_map selected by map_num
  * 
- * @param map_num   Select map by number
+ * @param map_num   Select game_map by number
  */
 int CreateMap(int map_num)
 {
-    if (map_num >= map.size())
+    if (map_num >= game_map.size())
     {
         cout << "You input incorrect number over max size!";
         cout << "Don't worry. I fixed it!" << "\n";
-        map_num %= map.size();
+        map_num %= game_map.size();
     }
-    play_map.resize(map[map_num].size(), vector<short>(map[map_num].size(), 2));
-    copy(map[map_num].begin(), map[map_num].end(), play_map.begin());
+    play_map.resize(game_map[map_num].size(), vector<short>(game_map[map_num].size(), 2));
+    copy(game_map[map_num].begin(), game_map[map_num].end(), play_map.begin());
     played_stage_history.push_back(map_num);
     return map_num;
 }
 
 /**
- * @brief               Load saved map randomly to play_map
+ * @brief               Load saved game_map randomly to play_map
  * 
- * @param is_played_map True(default): load, False: In unplayed map, load
+ * @param is_played_map True(default): load, False: In unplayed game_map, load
  */
 int CreateMap(bool is_played_map)
 {
     int map_num;
     srand(time(NULL));
     if (is_played_map)
-        map_num = rand() % map.size();
+        map_num = rand() % game_map.size();
     else
     {
         if (unplayed_stage_num.size() > 0)
@@ -119,7 +119,7 @@ int CreateMap(bool is_played_map)
         else
         {
             cout << "You played all stage!" << "\n";
-            map_num = rand() % map.size();
+            map_num = rand() % game_map.size();
         }
     }
     return CreateMap(map_num);

@@ -34,7 +34,9 @@ public:
     bool move();
     bool move(Point next_pos);
     bool move(int direction);
-
+    
+    void Hide();
+    void Show();
 };
 
 #endif

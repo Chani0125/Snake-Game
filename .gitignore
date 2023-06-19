@@ -1,11 +1,11 @@
 # Ignore all
-*
+snakeGame/*
 
 # Unignore all with extensions
-!*.*
+!snakeGame/*.*
 
-# Unignore all dirs
-!*/
+# # Unignore all dirs
+!snakeGame/*/
 
 snakeGame/.vscode
 .vscode
