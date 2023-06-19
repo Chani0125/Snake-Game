@@ -135,12 +135,24 @@ bool Snake::move()
 void Snake::Hide()
 {
     for (auto it = body.begin(); it != body.end(); it++)
+    {
         play_map[(*it).x][(*it).y] = game_map[PLAYING_MAP][(*it).x][(*it).y];
+
+        for (int i = 0; i <= 1; i++)
+            if (play_map[(*it).x][(*it).y] == i)
+                play_map_point[i].insert(Point((*it).x, (*it).y));
+    }
+
 }
 
 void Snake::Show()
 {
     for (auto it = body.begin(); it != body.end(); it++)
+    {
         play_map[(*it).x][(*it).y] = 4;
+
+        for (int i = 0; i <= 1; i++)
+            play_map_point[i].erase(Point((*it).x, (*it).y));
+    }
     play_map[HEAD.x][HEAD.y] = 3;
 }

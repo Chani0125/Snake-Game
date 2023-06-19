@@ -11,7 +11,7 @@ class Item
 {
 protected:
     Point pos;
-
+    int time;
 public:
     Item(Point pos);
     Item();
