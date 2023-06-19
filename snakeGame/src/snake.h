@@ -35,8 +35,8 @@ public:
     bool move(Point next_pos);
     bool move(int direction);
     
-    void InteractMap(bool is_short = true);
-
+    void Hide();
+    void Show();
 };
 
 #endif

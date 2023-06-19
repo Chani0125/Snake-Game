@@ -47,17 +47,16 @@ int Snake::size() { return body.size(); }
  */
 bool Snake::move(Point next_pos)
 {
+    Hide();
+
     body.insert(body.begin(), next_pos);
 
     int next_pos_map = play_map[next_pos.x][next_pos.y];
 
     if (next_pos_map != 6)
     {
-        InteractMap(false);
         body.pop_back();
     }
-    else
-        InteractMap();
 
     // Case: Wall, Immune Wall, Snake Body
     if (next_pos_map == 1 || next_pos_map == 2 || next_pos_map == 4)
@@ -72,7 +71,6 @@ bool Snake::move(Point next_pos)
     }
     else if (next_pos_map == 7) // Case: Item Poison
     {
-        InteractMap();
         body.pop_back();
         if (body.size() < 3)
             is_alive = false;
@@ -85,6 +83,8 @@ bool Snake::move(Point next_pos)
     {
 
     }
+
+    Show();
 
     return is_alive;
 }
@@ -124,11 +124,15 @@ bool Snake::move()
     return move(direction);
 }
 
-void Snake::InteractMap(bool is_short)
-{   
-    for (auto it = body.begin() + 1; it != body.end(); it++)
+void Snake::Hide()
+{
+    for (auto it = body.begin(); it != body.end(); it++)
+        play_map[(*it).x][(*it).y] = game_map[PLAYING_MAP][(*it).x][(*it).y];
+}
+
+void Snake::Show()
+{
+    for (auto it = body.begin(); it != body.end(); it++)
         play_map[(*it).x][(*it).y] = 4;
-    if (is_short)
-        play_map[TAIL.x][TAIL.y] = game_map[PLAYING_MAP][TAIL.x][TAIL.y];
     play_map[HEAD.x][HEAD.y] = 3;
 }
