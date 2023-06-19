@@ -94,6 +94,7 @@ int CreateMap(int map_num)
     play_map.resize(game_map[map_num].size(), vector<short>(game_map[map_num].size(), 2));
     copy(game_map[map_num].begin(), game_map[map_num].end(), play_map.begin());
     played_stage_history.push_back(map_num);
+    unplayed_stage_num.erase(remove(unplayed_stage_num.begin(), unplayed_stage_num.end(), map_num), unplayed_stage_num.end());
     return map_num;
 }
 
@@ -114,7 +115,6 @@ int CreateMap(bool is_played_map)
         {
             auto it = unplayed_stage_num.begin() + (rand() % unplayed_stage_num.size());
             map_num = *it;
-            unplayed_stage_num.erase(it);
         }
         else
         {

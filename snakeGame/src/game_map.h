@@ -6,6 +6,7 @@
 #define MAP_H       play_map.size()
 #define MAP_W       play_map[0].size()
 #define PLAYING_MAP played_stage_history.back()
+#define STAGE       played_stage_history.size()
 
 using namespace std;
 

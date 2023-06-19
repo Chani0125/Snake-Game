@@ -17,13 +17,11 @@ Snake::Snake()
     is_alive = true;
     is_eat_growth = false;
     // Set initial direction
-    direction = SOUTH;
+    direction = EAST;
     // Make initial Head and Body
     for (int i = 0; i < 3; i++)
-    {
-        body.push_back(Point(5-i, 2));
-        play_map[5-i][2] = 3 + (i != 0);
-    }
+        body.insert(body.begin(), Point(2, 2 + i));
+    Show();
 }
 
 Snake::~Snake()

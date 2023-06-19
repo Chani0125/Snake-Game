@@ -133,6 +133,47 @@ void StartScreen()
     while(getch() != KEY_UP);
 }
 
+void NewStage()
+{
+    clear();
+    SetGameWindow();
+
+    ScreenMap();
+    ScreenBoard();
+    
+    mvwprintw(playing_map, MAP_H/2-2, MAP_W-15, " ############################### ");
+    mvwprintw(playing_map, MAP_H/2-1, MAP_W-15, " #                             # ");
+    mvwprintw(playing_map, MAP_H/2,   MAP_W-15, " #          STAGE %03d          # ", STAGE);
+    mvwprintw(playing_map, MAP_H/2+1, MAP_W-15, " #  Press RIGHT key to start.  # ");
+    mvwprintw(playing_map, MAP_H/2+2, MAP_W-15, " #                             # ");
+    mvwprintw(playing_map, MAP_H/2+3, MAP_W-15, " ############################### ");
+
+    refresh();
+
+    while(getch() != KEY_RIGHT);
+}
+
+
+void NextStage()
+{
+    clear();
+    SetGameWindow();
+
+    ScreenMap();
+    ScreenBoard();
+    
+    mvwprintw(playing_map, MAP_H/2-2, MAP_W-15, " ############################### ");
+    mvwprintw(playing_map, MAP_H/2-1, MAP_W-15, " #                             # ");
+    mvwprintw(playing_map, MAP_H/2,   MAP_W-15, " #        STAGE CLEAR!!        # ");
+    mvwprintw(playing_map, MAP_H/2+1, MAP_W-15, " #  Press UP key to continue.  # ");
+    mvwprintw(playing_map, MAP_H/2+2, MAP_W-15, " #                             # ");
+    mvwprintw(playing_map, MAP_H/2+3, MAP_W-15, " ############################### ");
+
+    refresh();
+
+    while(getch() != KEY_UP);
+}
+
 void GameOver()
 {
     clear();
@@ -141,12 +182,12 @@ void GameOver()
     ScreenMap('X');
     ScreenBoard();
     
-    mvwprintw(playing_map, MAP_H/2-2, MAP_W-13, " ########################### ");
-    mvwprintw(playing_map, MAP_H/2-1, MAP_W-13, " #                         # ");
-    mvwprintw(playing_map, MAP_H/2,   MAP_W-13, " #       GAME OVER!!       # ");
-    mvwprintw(playing_map, MAP_H/2+1, MAP_W-13, " #  Press UP key to exit.  # ");
-    mvwprintw(playing_map, MAP_H/2+2, MAP_W-13, " #                         # ");
-    mvwprintw(playing_map, MAP_H/2+3, MAP_W-13, " ########################### ");
+    mvwprintw(playing_map, MAP_H/2-2, MAP_W-15, " ############################### ");
+    mvwprintw(playing_map, MAP_H/2-1, MAP_W-15, " #                             # ");
+    mvwprintw(playing_map, MAP_H/2,   MAP_W-15, " #         GAME OVER!!         # ");
+    mvwprintw(playing_map, MAP_H/2+1, MAP_W-15, " #    Press UP key to exit.    # ");
+    mvwprintw(playing_map, MAP_H/2+2, MAP_W-15, " #                             # ");
+    mvwprintw(playing_map, MAP_H/2+3, MAP_W-15, " ############################### ");
 
     refresh();
 

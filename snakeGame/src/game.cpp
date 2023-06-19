@@ -19,20 +19,16 @@ int tick = 500;
 int play_time = 0;
 
 void InitGame();
-void SetGame();
 void TestGame();
 
 int main()
 {
     InitGame();
 
-
     // TestGame();
 
     StartScreen();
     LoadingScreen();
-
-    SetGameWindow();
 
     bool snake_live = true;
     while (true)
@@ -40,14 +36,21 @@ int main()
         // if (!snake_live)
         //     break;
         
-        SetGame();
+        if (STAGE == 0)
+            CreateMap(0);
+        else
+            CreateMap(false);
         
         Snake play_snake;
         vector<Item> play_items;
+        vector<int> generate_item_time = {0, 10, 20};
         Gate play_gate;
+
+        NewStage();
 
         while (true)
         {   
+
             if(!(snake_live = play_snake.move()))
             {
                 GameOver();
@@ -58,6 +61,7 @@ int main()
             usleep(tick * 1000);
             play_time += tick;
         }
+
 
     }
 
@@ -70,18 +74,12 @@ void InitGame()
     srand(time(NULL));
 
     LoadMapFile();
-    CreateMap(0);
 
     initscr();
     nodelay(stdscr, true);
     keypad(stdscr, true);
     noecho();
     curs_set(0);
-}
-
-void SetGame()
-{
-    CreateMap(0);
 }
 
 void TestGame()
