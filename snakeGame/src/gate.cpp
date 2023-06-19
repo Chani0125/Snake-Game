@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 
+using namespace std;
+
 Gate::Gate(/* args */)
 {
 }

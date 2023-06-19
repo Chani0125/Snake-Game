@@ -27,7 +27,7 @@ int main()
 
     Snake play_snake;
     vector<Item> play_items;
-    // Gate play_gate;
+    Gate play_gate;
 
     SetGame();
 
