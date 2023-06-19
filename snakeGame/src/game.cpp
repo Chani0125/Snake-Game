@@ -8,6 +8,8 @@
 #include "draw.h"
 #include "snake.h"
 #include "item.h"
+#include "item_growth.h"
+#include "item_poison.h"
 #include "gate.h"
 
 #define NUM_ITEM 3
@@ -20,6 +22,8 @@ int num_tick = 0;
 int play_time = 0;
 
 void InitGame();
+Item* makeItem();
+
 void TestGame();
 
 int main()
@@ -56,21 +60,33 @@ int main()
 
         while (true)
         {   
-            if(!(snake_live = play_snake.move()))
+            if (!snake_live == play_snake.move())
             {
                 GameOver();
                 break;
             }
-            
+
             switch (num_tick)
             {
             case 0:
             case 10:
             case 20:
-                play_items[0] = makeItem();
+                play_items[num_tick/10] = makeItem();
                 break;
             default:
                 break;
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (play_items[i] == nullptr)
+                    break;
+                if(play_items[i]->Check(play_snake.GetHead()) == false)
+                {   
+                    play_items[i]->Hide(play_snake.GetHead());
+                    delete play_items[i];
+                    play_items[i] = makeItem();
+                }
             }
 
             ScreenUpdate();
@@ -101,7 +117,30 @@ void InitGame()
 
 Item* makeItem()
 {
-    
+    auto it = play_map_point[0].begin();
+    int tmp = rand() % play_map_point[0].size();
+    for (int i = 0; i < tmp; i++) it++;
+
+    Item* ans = nullptr;
+
+    int item_type = rand() % 2;
+    switch (item_type)
+    {
+    case 0:
+        ans = new GrowthItem(*it);
+        break;
+    case 1:
+        ans = new PoisonItem(*it);
+        break;
+    default:
+        break;
+    }
+
+    // play_map[(*it).x][(*it).y] = 6 + item_type;
+
+    play_map_point[0].erase(it);
+
+    return ans;
 }
 
 void TestGame()

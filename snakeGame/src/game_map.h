@@ -1,9 +1,9 @@
 #ifndef _GAME_MAP_
 #define _GAME_MAP_
 
+#include "point.h"
 #include <vector>
 #include <set>
-#include "point.h"
 
 #define MAP_H       play_map.size()
 #define MAP_W       play_map[0].size()

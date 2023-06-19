@@ -10,7 +10,6 @@ using namespace std;
 class PoisonItem : public Item
 {
 private:
-    int poison;
 public:
     PoisonItem(Point pos);
     ~PoisonItem();

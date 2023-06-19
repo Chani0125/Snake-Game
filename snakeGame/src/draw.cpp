@@ -13,6 +13,7 @@
 using namespace std;
 
 extern int tick;
+extern int play_time;
 
 WINDOW *playing_map, *score_board, *mission_board;
 
@@ -79,7 +80,7 @@ void ScreenMap(char snake_head)
                 element_print = '+';
                 break;
             case 7:
-                element_print = '+';
+                element_print = '-';
                 break;
             case 8:
                 element_print = 'S';
@@ -106,9 +107,10 @@ void ScreenBoard()
 void ScreenScoreBoard()
 {
     mvwprintw(score_board, 1, 2, "[Score Board]");
-    mvwprintw(score_board, 3, 2, "STAGE : %d", STAGE);
-    mvwprintw(score_board, 4, 2, "TICK  : %d ms", tick);
-    mvwprintw(score_board, 5, 2, "Score : ");
+    mvwprintw(score_board, 3, 2, "STAGE     : %d", STAGE);
+    mvwprintw(score_board, 4, 2, "TICK      : %d ms", tick);
+    mvwprintw(score_board, 5, 2, "Play Time : %d s", play_time / 1000);
+    mvwprintw(score_board, 6, 2, "Score     : ");
 }
 
 void ScreenMissionBoard()
