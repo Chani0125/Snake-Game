@@ -22,8 +22,6 @@ void TestGame();
 
 int main()
 {
-    initscr();
-
     InitGame();
 
     Snake play_snake;
@@ -31,34 +29,14 @@ int main()
 
     SetGame();
 
-    TestGame();
+    // TestGame();
 
-    // StartScreen();
-    // LoadingScreen();
+    StartScreen();
+    LoadingScreen();
 
     int key;
     while (true)
     {   
-        // clear();
-        // key = getch();
-        // switch (key)
-        // {
-        // case KEY_UP:
-        //     printw("You Press Key: UP\n");
-        //     break;
-        // case KEY_DOWN:
-        //     printw("You Press Key: DOWN\n");
-        //     break;
-        // case KEY_LEFT:
-        //     printw("You Press Key: LEFT\n");
-        //     break;
-        // case KEY_RIGHT:
-        //     printw("You Press Key: RIGHT\n");
-        //     break;
-        // default:
-        //     break;
-        // }
-        ScreenUpdate();
         usleep(tick * 1000);
         play_time += tick;
     }
@@ -71,6 +49,12 @@ void InitGame()
 {
     LoadMapFile();
     CreateMap(0);
+
+    initscr();
+    nodelay(stdscr, true);
+    keypad(stdscr, true);
+    noecho();
+    curs_set(0);
 }
 
 void SetGame()

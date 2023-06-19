@@ -59,12 +59,12 @@ void ScreenUpdate()
         // wprintw(playing_map, "\n");
     }
 
-    wprintw(score_board, "current score");
+    mvwprintw(score_board, 1, 2, "current score");
 
-    wprintw(mission_board, "body length\n");
-    wprintw(mission_board, "growth\n");
-    wprintw(mission_board, "poison\n");
-    wprintw(mission_board, "gate\n");
+    mvwprintw(mission_board, 1, 2, "body length\n");
+    mvwprintw(mission_board, 2, 2, "growth\n");
+    mvwprintw(mission_board, 3, 2, "poison\n");
+    mvwprintw(mission_board, 4, 2, "gate\n");
 
     refresh();
 
@@ -93,8 +93,8 @@ void LoadingScreen()
 void StartScreen()
 {
     clear();
-    mvprintw(10, 25, "         Snake Game");
-    mvprintw(11, 25, "Press any key to continue.");
+    mvprintw(10, 25, "        Snake Game");
+    mvprintw(11, 25, "Press UP key to continue.");
     refresh();
-    getch();
+    while(getch() != KEY_UP);
 }
