@@ -6,6 +6,4 @@ GrowthItem::GrowthItem(Point pos) : Item(pos)
     Show();
 }
 
-GrowthItem::~GrowthItem()
-{
-}
+GrowthItem::~GrowthItem() {}

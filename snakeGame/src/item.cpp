@@ -9,15 +9,14 @@ extern int tick;
 
 Item::Item(Point pos) : pos(pos)
 {
-    time = 2 * 1000 / tick + 20 + 1;
+    time = (5 * 1000 / tick) + 20 + 1;
 }
 
-Item::Item()
-{
-}
+Item::Item() {}
 
 Item::~Item()
 {
+    play_map_point[0].insert(pos);
 }
 
 bool Item::Check(Point snake_pos)
@@ -34,7 +33,7 @@ void Item::Show()
 
 void Item::Hide()
 {
-    play_map[pos.x][pos.y] = game_map[PLAYING_MAP][pos.x][pos.y];
+    play_map[pos.x][pos.y] = 0;
 }
 
 void Item::Hide(Point snake_pos)

@@ -23,6 +23,7 @@ int play_time = 0;
 
 void InitGame();
 Item* makeItem();
+Gate* makeGate();
 
 void TestGame();
 
@@ -34,8 +35,6 @@ int main()
 
     StartScreen();
     LoadingScreen();
-
-    // TODO: Item 생성
 
     bool snake_live = true;
     while (true)
@@ -51,7 +50,7 @@ int main()
         Snake play_snake;
         vector<Item*> play_items(3, nullptr);
         // vector<int> generate_item_time = {0, 10, 20};
-        Gate play_gate;
+        Gate *play_gate = nullptr;
         num_tick = 0;
 
         NewStage();
@@ -66,16 +65,14 @@ int main()
                 break;
             }
 
-            switch (num_tick)
-            {
-            case 0:
-            case 10:
-            case 20:
-                play_items[num_tick/10] = makeItem();
-                break;
-            default:
-                break;
-            }
+            if (num_tick == 0)
+                play_items[0] = makeItem();
+            else if (num_tick == 5 + (2 * 1000 / tick))
+                play_gate = makeGate();
+            else if (num_tick == 10 + (3 * 1000 / tick))
+                play_items[1] = makeItem();
+            else if (num_tick == 20 + (6 * 1000 / tick))
+                play_items[2] = makeItem();
 
             for (int i = 0; i < 3; i++)
             {
@@ -87,6 +84,11 @@ int main()
                     delete play_items[i];
                     play_items[i] = makeItem();
                 }
+            }
+
+            if (play_gate != nullptr)
+            {
+                play_gate->Check(play_snake.GetHead());
             }
 
             ScreenUpdate();
@@ -123,55 +125,47 @@ Item* makeItem()
 
     Item* ans = nullptr;
 
-    int item_type = rand() % 2;
+    int item_type = rand() % 4;
     switch (item_type)
     {
     case 0:
+    case 1:
+    case 2:
         ans = new GrowthItem(*it);
         break;
-    case 1:
+    case 3:
         ans = new PoisonItem(*it);
         break;
     default:
         break;
     }
 
-    // play_map[(*it).x][(*it).y] = 6 + item_type;
-
     play_map_point[0].erase(it);
+
+    return ans;
+}
+
+Gate* makeGate()
+{
+    auto it1 = play_map_point[1].begin();
+    auto it2= play_map_point[1].begin();
+
+    int tmp1 = rand() % play_map_point[1].size();
+    int tmp2 = rand() % (play_map_point[1].size() - 1);
+    tmp2 += (tmp2 >= tmp1);
+
+    for (int i = 0; i < tmp1; i++) it1++;
+    for (int i = 0; i < tmp2; i++) it2++;
+
+    Gate* ans = new Gate(*it1, *it2);
+
+    play_map_point[1].erase(it1);
+    play_map_point[1].erase(it2);
 
     return ans;
 }
 
 void TestGame()
 {
-    keypad(stdscr, true);
 
-    mvprintw(10, 25, "Press Key");
-    refresh();
-    usleep(tick * 3000);
-
-    clear();
-    int key = getch();
-    switch (key)
-    {
-    case KEY_UP:
-        mvprintw(10, 25, "You Press Key: UP");
-        break;
-    case KEY_DOWN:
-        mvprintw(10, 25, "You Press Key: DOWN");
-        break;
-    case KEY_LEFT:
-        mvprintw(10, 25, "You Press Key: LEFT");
-        break;
-    case KEY_RIGHT:
-        mvprintw(10, 25, "You Press Key: RIGHT");
-        break;
-    default:
-        mvprintw(10, 25, "You Press Key: NONE");
-        break;
-    }
-    refresh();
-
-    usleep(tick * 3000);
 }

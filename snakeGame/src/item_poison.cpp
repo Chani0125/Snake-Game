@@ -6,6 +6,4 @@ PoisonItem::PoisonItem(Point pos) : Item(pos)
     Show();
 }
 
-PoisonItem::~PoisonItem()
-{
-}
+PoisonItem::~PoisonItem() {}
