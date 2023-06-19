@@ -13,12 +13,4 @@ public:
     ~Gate();
 };
 
-Gate::Gate(/* args */)
-{
-}
-
-Gate::~Gate()
-{
-}
-
 #endif
