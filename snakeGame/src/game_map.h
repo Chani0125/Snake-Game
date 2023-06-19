@@ -3,6 +3,9 @@
 
 #include <vector>
 
+#define MAP_H   play_map.size()
+#define MAP_W   play_map[0].size()
+
 using namespace std;
 
 /**

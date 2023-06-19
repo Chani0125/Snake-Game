@@ -13,7 +13,9 @@ Snake::Snake()
 {
     is_alive = true;
     is_eat_growth = false;
+    // Set initial direction
     direction = SOUTH;
+    // Make initial Head and Body
     for (int i = 0; i < 3; i++)
         body.push_back({5-i, 2});
 }
