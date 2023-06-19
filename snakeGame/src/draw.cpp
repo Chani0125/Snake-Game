@@ -12,6 +12,8 @@
 
 using namespace std;
 
+extern int tick;
+
 WINDOW *playing_map, *score_board, *mission_board;
 
 void ScreenUpdate()
@@ -97,12 +99,22 @@ void ScreenMap(char snake_head)
 
 void ScreenBoard()
 {
-    mvwprintw(score_board, 1, 2, "current score");
+    ScreenScoreBoard();
+    ScreenMissionBoard();
+}
 
-    mvwprintw(mission_board, 1, 2, "body length\n");
-    mvwprintw(mission_board, 2, 2, "growth\n");
-    mvwprintw(mission_board, 3, 2, "poison\n");
-    mvwprintw(mission_board, 4, 2, "gate\n");
+void ScreenScoreBoard()
+{
+    mvwprintw(score_board, 1, 2, "Tick  : %d ms", tick);
+    mvwprintw(score_board, 2, 2, "Score : ");
+}
+
+void ScreenMissionBoard()
+{
+    mvwprintw(mission_board, 1, 2, "Body Length  : \n");
+    mvwprintw(mission_board, 2, 2, "Eaten Growth : \n");
+    mvwprintw(mission_board, 3, 2, "Eaten Poison : \n");
+    mvwprintw(mission_board, 4, 2, "Use Gate     : \n");
 }
 
 void LoadingScreen()

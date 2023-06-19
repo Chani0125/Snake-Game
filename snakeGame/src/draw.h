@@ -8,6 +8,8 @@ void ScreenUpdate();
 void SetGameWindow();
 void ScreenMap(char snake_head = 'O');
 void ScreenBoard();
+void ScreenScoreBoard();
+void ScreenMissionBoard();
 
 void LoadingScreen();
 void StartScreen();

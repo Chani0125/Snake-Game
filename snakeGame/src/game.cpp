@@ -30,6 +30,9 @@ int main()
     StartScreen();
     LoadingScreen();
 
+    // TODO: Tick 변화
+    // TODO: Item 생성
+
     bool snake_live = true;
     while (true)
     {   
@@ -62,7 +65,7 @@ int main()
             play_time += tick;
         }
 
-
+        tick = ((tick - 50) * 4 / 5) + 50;
     }
 
     endwin();
