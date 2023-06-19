@@ -33,9 +33,8 @@ int main()
 
     // TestGame();
 
-    StartScreen();
-
-    LoadingScreen();
+    // StartScreen();
+    // LoadingScreen();
 
     while (true)
     {
