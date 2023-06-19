@@ -24,12 +24,12 @@ void ScreenUpdate()
     attron(COLOR_PAIR(1));
     wbkgd(playing_map, COLOR_PAIR(1));
 
-    WINDOW *score_board = subwin(stdscr, ((MAIN_GAME_H / 2) - (1 - (MAIN_GAME_H % 2))), (BOARD_W), (START_H), (START_W + MAIN_GAME_W * 2 + 2));
+    WINDOW *score_board = subwin(stdscr, (MAP_H / 2 - (1 - (MAP_H % 2)) + 1), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
     init_pair(2, COLOR_BLACK, COLOR_GREEN);
     attron(COLOR_PAIR(2));
     wbkgd(score_board, COLOR_PAIR(2));
 
-    WINDOW *mission_board = subwin(stdscr, (MAIN_GAME_H / 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2)), (START_W + MAIN_GAME_W * 2 + 2));
+    WINDOW *mission_board = subwin(stdscr, (MAP_H / 2 + 1), (BOARD_W), (START_H + (MAP_H / 2) + (1 + MAP_H % 2)), (START_W + MAIN_GAME_W + 2));
     init_pair(2, COLOR_BLACK, COLOR_GREEN);
     attron(COLOR_PAIR(2));
     wbkgd(mission_board, COLOR_PAIR(2));
@@ -68,7 +68,7 @@ void ScreenUpdate()
 
     refresh();
 
-    // getch();
+    getch();
 }
 
 void LoadingScreen()
