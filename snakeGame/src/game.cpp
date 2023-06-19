@@ -38,7 +38,7 @@ int main()
     {   
         // if (!snake_live)
         //     break;
-        
+
         if (STAGE == 0)
             CreateMap(0);
         else
@@ -48,8 +48,10 @@ int main()
         vector<Item> play_items;
         vector<int> generate_item_time = {0, 10, 20};
         Gate play_gate;
-
+        
         NewStage();
+
+        SetGameWindow();
 
         while (true)
         {   
@@ -65,7 +67,7 @@ int main()
             play_time += tick;
         }
 
-        tick = ((tick - 50) * 4 / 5) + 50;
+        tick = ((tick - 50) * (STAGE / 2 + 4) / (STAGE / 2 + 5)) + 50;
     }
 
     endwin();

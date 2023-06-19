@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include <iostream>
 
-#define START_H 2
-#define START_W 4
+#define START_H 1
+#define START_W 2
 #define MAIN_GAME_H (MAP_H+2)
 #define MAIN_GAME_W (MAP_W*2+3)
 #define BOARD_W 32
@@ -20,11 +20,11 @@ void ScreenUpdate()
 {
     clear();
 
-    SetGameWindow();
+    // SetGameWindow();
     ScreenMap();
     ScreenBoard();
 
-    refresh();
+    // refresh();
 
     getch();
 }
@@ -34,20 +34,20 @@ void SetGameWindow()
     start_color();
 
     playing_map = subwin(stdscr, (MAIN_GAME_H), (MAIN_GAME_W), (START_H), (START_W));
-    init_pair(1, COLOR_RED, COLOR_WHITE);
-    box(playing_map, 0, 0);
-    attron(COLOR_PAIR(1));
-    wbkgd(playing_map, COLOR_PAIR(1));
+    // init_pair(1, COLOR_RED, COLOR_WHITE);
+    // box(playing_map, 0, 0);
+    // attron(COLOR_PAIR(1));
+    // wbkgd(playing_map, COLOR_PAIR(1));
 
     score_board = subwin(stdscr, (MAIN_GAME_H / 2 - (1 - (MAIN_GAME_H % 2))), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
-    init_pair(2, COLOR_BLACK, COLOR_GREEN);
-    attron(COLOR_PAIR(2));
-    wbkgd(score_board, COLOR_PAIR(2));
+    // init_pair(2, COLOR_BLACK, COLOR_GREEN);
+    // attron(COLOR_PAIR(2));
+    // wbkgd(score_board, COLOR_PAIR(2));
 
     mission_board = subwin(stdscr, (MAIN_GAME_H / 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2)), (START_W + MAIN_GAME_W + 2));
-    init_pair(2, COLOR_BLACK, COLOR_GREEN);
-    attron(COLOR_PAIR(2));
-    wbkgd(mission_board, COLOR_PAIR(2));
+    // init_pair(2, COLOR_BLACK, COLOR_GREEN);
+    // attron(COLOR_PAIR(2));
+    // wbkgd(mission_board, COLOR_PAIR(2));
 }
 
 void ScreenMap(char snake_head)
@@ -105,16 +105,19 @@ void ScreenBoard()
 
 void ScreenScoreBoard()
 {
-    mvwprintw(score_board, 1, 2, "Tick  : %d ms", tick);
-    mvwprintw(score_board, 2, 2, "Score : ");
+    mvwprintw(score_board, 1, 2, "[Score Board]");
+    mvwprintw(score_board, 3, 2, "STAGE : %d", STAGE);
+    mvwprintw(score_board, 4, 2, "TICK  : %d ms", tick);
+    mvwprintw(score_board, 5, 2, "Score : ");
 }
 
 void ScreenMissionBoard()
 {
-    mvwprintw(mission_board, 1, 2, "Body Length  : \n");
-    mvwprintw(mission_board, 2, 2, "Eaten Growth : \n");
-    mvwprintw(mission_board, 3, 2, "Eaten Poison : \n");
-    mvwprintw(mission_board, 4, 2, "Use Gate     : \n");
+    mvwprintw(mission_board, 1, 2, "[Mission - STAGE %d]", STAGE);
+    mvwprintw(mission_board, 3, 2, "Body Length  : ");
+    mvwprintw(mission_board, 4, 2, "Eaten Growth : ");
+    mvwprintw(mission_board, 5, 2, "Eaten Poison : ");
+    mvwprintw(mission_board, 6, 2, "Use Gate     : ");
 }
 
 void LoadingScreen()
