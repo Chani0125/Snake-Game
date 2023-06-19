@@ -32,6 +32,13 @@ bool Snake::GetEatGrowth() { return is_eat_growth; }
 
 int Snake::size() { return body.size(); }
 
+/**
+ * @brief Move snake
+ * 
+ * @param next_pos  Next position of snake
+ * @return true     Snake is Alive
+ * @return false    Snake is Dead
+ */
 bool Snake::move(Point next_pos)
 {
     body.insert(body.begin(), next_pos);
@@ -66,7 +73,6 @@ bool Snake::move(Point next_pos)
     {
 
     }
-
 
     return is_alive;
 }

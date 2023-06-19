@@ -3,6 +3,8 @@
 
 using namespace std;
 
-void Draw();
+void ScreenUpdate();
+void LoadingScreen();
+void StartScreen();
 
 #endif
