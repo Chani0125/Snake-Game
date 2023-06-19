@@ -13,6 +13,7 @@ using namespace std;
 
 vector<vector<vector<short>>> game_map;
 vector<vector<short>> play_map;
+vector<set<Point>> play_map_point(2, set<Point>());
 
 vector<int> unplayed_stage_num;
 vector<int> played_stage_history;
@@ -91,10 +92,22 @@ int CreateMap(int map_num)
         cout << "Don't worry. I fixed it!" << "\n";
         map_num %= game_map.size();
     }
+
     play_map.resize(game_map[map_num].size(), vector<short>(game_map[map_num].size(), 2));
     copy(game_map[map_num].begin(), game_map[map_num].end(), play_map.begin());
+
+    for (int i = 0; i <= 1; i++)
+    {
+        play_map_point[i] = set<Point>();
+        for (int x = 0; x < MAP_H; x++)
+            for (int y = 0; y < MAP_W; y++)
+                if (play_map[x][y] == i)
+                    play_map_point[i].insert(Point(x, y));
+    }
+
     played_stage_history.push_back(map_num);
     unplayed_stage_num.erase(remove(unplayed_stage_num.begin(), unplayed_stage_num.end(), map_num), unplayed_stage_num.end());
+
     return map_num;
 }
 

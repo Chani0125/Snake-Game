@@ -16,6 +16,7 @@ using namespace std;
 
 // unit: ms
 int tick = 500;
+int num_tick = 0;
 int play_time = 0;
 
 void InitGame();
@@ -30,7 +31,6 @@ int main()
     StartScreen();
     LoadingScreen();
 
-    // TODO: Tick 변화
     // TODO: Item 생성
 
     bool snake_live = true;
@@ -45,26 +45,38 @@ int main()
             CreateMap(false);
         
         Snake play_snake;
-        vector<Item> play_items;
-        vector<int> generate_item_time = {0, 10, 20};
+        vector<Item*> play_items(3, nullptr);
+        // vector<int> generate_item_time = {0, 10, 20};
         Gate play_gate;
-        
+        num_tick = 0;
+
         NewStage();
 
         SetGameWindow();
 
         while (true)
         {   
-
             if(!(snake_live = play_snake.move()))
             {
                 GameOver();
                 break;
             }
             
+            switch (num_tick)
+            {
+            case 0:
+            case 10:
+            case 20:
+                play_items[0] = makeItem();
+                break;
+            default:
+                break;
+            }
+
             ScreenUpdate();
             usleep(tick * 1000);
             play_time += tick;
+            num_tick++;
         }
 
         tick = ((tick - 50) * (STAGE / 2 + 4) / (STAGE / 2 + 5)) + 50;
@@ -85,6 +97,11 @@ void InitGame()
     keypad(stdscr, true);
     noecho();
     curs_set(0);
+}
+
+Item* makeItem()
+{
+    
 }
 
 void TestGame()

@@ -2,6 +2,8 @@
 #define _GAME_MAP_
 
 #include <vector>
+#include <set>
+#include "point.h"
 
 #define MAP_H       play_map.size()
 #define MAP_W       play_map[0].size()
@@ -24,6 +26,7 @@ using namespace std;
  */
 extern vector<vector<vector<short>>> game_map;
 extern vector<vector<short>> play_map;
+extern vector<set<Point>> play_map_point;
 
 extern vector<int> unplayed_stage_num;
 extern vector<int> played_stage_history;
