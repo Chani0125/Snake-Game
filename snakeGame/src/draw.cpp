@@ -34,7 +34,8 @@ void ScreenUpdate()
                 element_print = '@';
                 break;
             case 3:
-                element_print = '*';
+                element_print = 'O';
+                break;
             case 4:
                 element_print = '+';
                 break;

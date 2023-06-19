@@ -22,7 +22,7 @@ Snake::Snake()
     for (int i = 0; i < 3; i++)
     {
         body.push_back(Point(5-i, 2));
-        play_map[5-i][2] = 3 + (i == 0);
+        play_map[5-i][2] = 3 + (i != 0);
     }
 }
 
