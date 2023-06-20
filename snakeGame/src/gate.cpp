@@ -5,6 +5,8 @@ using namespace std;
 
 extern int tick;
 
+
+
 Gate::Gate() {}
 
 Gate::Gate(int x1, int y1, int x2, int y2) : Gate({x1, y1}, {x2, y2}) {}
@@ -22,20 +24,47 @@ Gate::~Gate()
     Hide();
 }
 
-bool Gate::Check(Point snake_pos)
+int Gate::Check(Point snake_head_pos, Point snake_tail_pos)
 {
-    if (snake_pos == pos1)
-    {
-        snake_passing = true;
-    }
-    else if (snake_pos == pos2)
-    {
-        snake_passing = true;
-    }
+    int dx[] = {-1, 0, 1, 0};
+    int dy[] = {0, 1, 0, -1};
 
-    if (!snake_passing)
-        time--;
-        
+    if (snake_passing)
+    {
+        if (in_gate_num == 1)
+        {
+            if (snake_tail_pos + Point(dx[in_dir], dy[in_dir]) == pos2)
+            {
+                return 0;
+            }
+        }
+        else if (in_gate_num == 2)
+        {
+            if (snake_tail_pos + Point(dx[in_dir], dy[in_dir]) == pos1)
+            {
+                return 0;
+            }
+        }
+    }
+    else
+    {
+        if (snake_head_pos == pos1)
+        {
+            snake_passing = true;
+            in_gate_num = 1;
+            return -1;
+        }
+        else if (snake_head_pos == pos2)
+        {
+            snake_passing = true;
+            in_gate_num = 2;
+            return -1;
+        }
+        else
+        {
+            time--;
+        }
+    }
     return time;
 }
 
@@ -52,4 +81,53 @@ void Gate::Hide()
 void Gate::Hide(Point snake_pos)
 {
     Hide();
+}
+
+int Gate::GetDirection(int snake_dir)
+{
+    int dx[] = {-1, 0, 1, 0};
+    int dy[] = {0, 1, 0, -1};
+
+    in_dir = snake_dir;
+
+    int tmp_map_info;
+    if (in_gate_num == 1)
+    {
+        for (int i = snake_dir; i < snake_dir+4; i++)
+        {
+            if (0 <= pos2.x+dx[i%4] && pos2.x+dx[i%4] < MAP_H && 0 <= pos2.y+dy[i%4] && pos2.y+dy[i%4] < MAP_W)
+            {
+                tmp_map_info = play_map[pos2.x+dx[i%4]][pos2.y+dy[i%4]];
+                if (tmp_map_info != 1 && tmp_map_info != 2 && tmp_map_info != 5)
+                {
+                    return i%4;
+                }
+            }
+        }
+    }
+    else if (in_gate_num == 2)
+    {
+        for (int i = snake_dir; i < snake_dir+4; i++)
+        {
+            if (0 <= pos1.x+dx[i%4] && pos1.x+dx[i%4] < MAP_H && 0 <= pos1.y+dy[i%4] && pos1.y+dy[i%4] < MAP_W)
+            {
+                tmp_map_info = play_map[pos1.x+dx[i%4]][pos1.y+dy[i%4]];
+                if (tmp_map_info != 1 && tmp_map_info != 2 && tmp_map_info != 5)
+                {
+                    return i%4;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+Point Gate::GetOutPos()
+{
+    if (in_gate_num == 1)
+        return pos2;
+    else if (in_gate_num == 2)
+        return pos1;
+    return Point();
 }

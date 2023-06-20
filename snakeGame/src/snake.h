@@ -26,6 +26,8 @@ public:
 
     // getter
     Point GetHead();
+    Point GetTail();
+    int GetDirection();
     bool GetAlive();
     bool GetEatGrowth();
 
@@ -34,6 +36,7 @@ public:
     bool move();
     bool move(Point next_pos);
     bool move(int direction);
+    bool move(int dir, Point t_pos);
     
     void Hide();
     void Show();

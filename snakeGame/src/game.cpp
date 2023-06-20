@@ -17,7 +17,8 @@
 using namespace std;
 
 // unit: ms
-int tick = 500;
+// int tick = 500;
+int tick = 300;
 int num_tick = 0;
 int play_time = 0;
 
@@ -66,9 +67,10 @@ int main()
             }
 
             if (num_tick == 0)
+            {
                 play_items[0] = makeItem();
-            else if (num_tick == 5 + (2 * 1000 / tick))
                 play_gate = makeGate();
+            }
             else if (num_tick == 10 + (3 * 1000 / tick))
                 play_items[1] = makeItem();
             else if (num_tick == 20 + (6 * 1000 / tick))
@@ -88,7 +90,23 @@ int main()
 
             if (play_gate != nullptr)
             {
-                play_gate->Check(play_snake.GetHead());
+                int gate_check = play_gate->Check(play_snake.GetHead(), play_snake.GetTail());
+                if (gate_check == -1)
+                {
+                    int dir = play_gate->GetDirection(play_snake.GetDirection());
+                    if (!snake_live == play_snake.move(dir, play_gate->GetOutPos()))
+                    {
+                        GameOver();
+                        break;
+                    }
+                    mvwprintw(stdscr, 1, 1, "%d", play_gate->in_dir);
+                }
+                else if (gate_check == 0)
+                {
+                    delete play_gate;
+                    play_gate = makeGate();
+                }
+                // play_gate->Show();
             }
 
             ScreenUpdate();
