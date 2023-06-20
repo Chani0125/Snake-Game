@@ -65,7 +65,7 @@ int main()
 
         while (true)
         {   
-            if (!snake_live == play_snake.move())
+            if (!(snake_live = play_snake.move()))
             {
                 GameOver();
                 break;
