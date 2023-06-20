@@ -1,5 +1,6 @@
 #include "draw.h"
 #include "game_map.h"
+#include "mission.h"
 #include <ncurses.h>
 #include <unistd.h>
 #include <iostream>
@@ -15,6 +16,9 @@ using namespace std;
 extern int tick;
 extern int play_time;
 extern int num_tick;
+
+extern Mission *play_mission;
+extern GameInfo* play_info;
 
 WINDOW *playing_map, *score_board, *mission_board;
 
@@ -41,12 +45,12 @@ void SetGameWindow()
     // attron(COLOR_PAIR(1));
     // wbkgd(playing_map, COLOR_PAIR(1));
 
-    score_board = subwin(stdscr, (MAIN_GAME_H / 2 - (1 - (MAIN_GAME_H % 2))), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
+    score_board = subwin(stdscr, (MAIN_GAME_H / 2 - (1 - (MAIN_GAME_H % 2)) + 2), (BOARD_W), (START_H), (START_W + MAIN_GAME_W + 2));
     // init_pair(2, COLOR_BLACK, COLOR_GREEN);
     // attron(COLOR_PAIR(2));
     // wbkgd(score_board, COLOR_PAIR(2));
 
-    mission_board = subwin(stdscr, (MAIN_GAME_H / 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2)), (START_W + MAIN_GAME_W + 2));
+    mission_board = subwin(stdscr, (MAIN_GAME_H / 2 - 2), (BOARD_W), (START_H + (MAIN_GAME_H / 2) + (MAIN_GAME_H % 2) + 2), (START_W + MAIN_GAME_W + 2));
     // init_pair(2, COLOR_BLACK, COLOR_GREEN);
     // attron(COLOR_PAIR(2));
     // wbkgd(mission_board, COLOR_PAIR(2));
@@ -83,12 +87,6 @@ void ScreenMap(char snake_head)
             case 7:
                 element_print = '-';
                 break;
-            case 8:
-                element_print = 'S';
-                break;
-            case 9:
-                element_print = 'F';
-                break;
             default:
                 continue;
             }
@@ -108,20 +106,26 @@ void ScreenBoard()
 void ScreenScoreBoard()
 {
     mvwprintw(score_board, 1, 2, "[Score Board]");
+
     mvwprintw(score_board, 3, 2, "STAGE        : %d", STAGE);
     mvwprintw(score_board, 4, 2, "TICK         : %d ms", tick);
-    mvwprintw(score_board, 5, 2, "Stage Time   : %d s", tick * num_tick / 1000);
-    mvwprintw(score_board, 7, 2, "Play Time    : %d s", play_time / 1000);
-    mvwprintw(score_board, 8, 2, "Score        : ");
+    mvwprintw(score_board, 5, 2, "Play Time    : %d s", play_time / 1000);
+    mvwprintw(score_board, 6, 2, "Stage Time   : %d s", tick * num_tick / 1000);
+
+    mvwprintw(score_board, 8, 2, "Body Length  : %d / %d", play_info->body_len, play_info->max_body_len);
+    mvwprintw(score_board, 9, 2, "Eaten Growth : %d", play_info->n_growth);
+    mvwprintw(score_board, 10, 2, "Eaten Poison : %d", play_info->n_poison);
+    mvwprintw(score_board, 11, 2, "Use Gate     : %d", play_info->n_gate);
 }
 
 void ScreenMissionBoard()
 {
     mvwprintw(mission_board, 1, 2, "[Mission - STAGE %d]", STAGE);
-    mvwprintw(mission_board, 3, 2, "Body Length  : ");
-    mvwprintw(mission_board, 4, 2, "Eaten Growth : ");
-    mvwprintw(mission_board, 5, 2, "Eaten Poison : ");
-    mvwprintw(mission_board, 6, 2, "Use Gate     : ");
+
+    mvwprintw(mission_board, 3, 2, "Body Length  : %d", play_mission->goal.body_len); mvwprintw(mission_board, 3, 21, "(%c)", play_mission->achieve[0] ? 'v' : ' ');
+    mvwprintw(mission_board, 4, 2, "Eaten Growth : %d", play_mission->goal.n_growth); mvwprintw(mission_board, 4, 21, "(%c)", play_mission->achieve[1] ? 'v' : ' ');
+    mvwprintw(mission_board, 5, 2, "Eaten Poison : %d", play_mission->goal.n_poison); mvwprintw(mission_board, 5, 21, "(%c)", play_mission->achieve[2] ? 'v' : ' ');
+    mvwprintw(mission_board, 6, 2, "Use Gate     : %d", play_mission->goal.n_gate  ); mvwprintw(mission_board, 6, 21, "(%c)", play_mission->achieve[3] ? 'v' : ' ');
 }
 
 void LoadingScreen()
@@ -209,6 +213,7 @@ void GameOver()
     mvwprintw(playing_map, MAP_H/2+3, MAP_W-15, " ############################### ");
 
     refresh();
-
+    
+    usleep(tick * 1000);
     while(getch() != KEY_UP);
 }

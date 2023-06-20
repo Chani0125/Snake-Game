@@ -1,5 +1,6 @@
 #include "snake.h"
 #include "game_map.h"
+#include "game_info.h"
 #include <ncurses.h>
 
 #define NORTH   0
@@ -11,6 +12,8 @@
 
 int dx[] = {-1, 0, 1, 0};
 int dy[] = {0, 1, 0, -1};
+
+extern GameInfo* play_info;
 
 Snake::Snake()
 {
@@ -73,23 +76,18 @@ bool Snake::move(Point next_pos, bool reduce)
     
     // Case: Gate
     case 5:
+        play_info->n_gate++;
         break;
     
     // Case: Item Growth
     case 6:
+        play_info->n_growth++;
         break;
     
     // Case: Item Poison
     case 7:
+        play_info->n_poison++;
         body.pop_back();
-        break;
-    
-    // Case: Item Fast Timer
-    case 8:
-        break;
-    
-    // Case: Item Slow Timer
-    case 9:
         break;
     
     default:
@@ -98,6 +96,9 @@ bool Snake::move(Point next_pos, bool reduce)
 
     Show();
     
+    play_info->body_len = body.size();
+    play_info->max_body_len = max(play_info->max_body_len, play_info->body_len);
+
     if (body.size() < 3)
         is_alive = false;
     

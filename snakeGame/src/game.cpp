@@ -11,6 +11,7 @@
 #include "item_growth.h"
 #include "item_poison.h"
 #include "gate.h"
+#include "mission.h"
 
 #define NUM_ITEM 3
 
@@ -18,13 +19,14 @@ using namespace std;
 
 // unit: ms
 int tick = 500;
-// int tick = 50;
 int num_tick = 0;
 int play_time = 0;
 
 void InitGame();
 Item* makeItem();
 Gate* makeGate();
+Mission* play_mission;
+GameInfo* play_info;
 
 void TestGame();
 
@@ -34,10 +36,12 @@ int main()
 
     // TestGame();
 
-    StartScreen();
-    LoadingScreen();
-
+    // StartScreen();
+    // LoadingScreen();
+    
+    play_mission = new Mission();
     bool snake_live = true;
+
     while (true)
     {   
         // if (!snake_live)
@@ -50,8 +54,9 @@ int main()
         
         Snake play_snake;
         vector<Item*> play_items(3, nullptr);
-        // vector<int> generate_item_time = {0, 10, 20};
         Gate *play_gate = nullptr;
+        play_info = new GameInfo();
+        play_mission->SetMission();
         num_tick = 0;
 
         NewStage();
@@ -69,12 +74,16 @@ int main()
             if (num_tick == 0)
             {
                 play_items[0] = makeItem();
+            }
+            else if (num_tick == 5 + (3 * 1000 / tick))
+            {
+                play_items[1] = makeItem();
+            }
+            else if (num_tick == 10 + (6 * 1000 / tick))
+            {
+                play_items[2] = makeItem();
                 play_gate = makeGate();
             }
-            else if (num_tick == 10 + (3 * 1000 / tick))
-                play_items[1] = makeItem();
-            else if (num_tick == 20 + (6 * 1000 / tick))
-                play_items[2] = makeItem();
 
             for (int i = 0; i < 3; i++)
             {
@@ -109,6 +118,16 @@ int main()
                     play_snake.Reduce();
                 play_gate->Show();
             }
+            
+            play_mission->IsAchieve(*play_info);
+
+            if (play_mission->isCleared())
+            {
+                NextStage();
+                play_time += tick;
+                num_tick++;
+                continue;
+            }
 
             ScreenUpdate();
             usleep(tick * 1000);
@@ -116,6 +135,7 @@ int main()
             num_tick++;
         }
 
+        delete play_info;
         tick = ((tick - 50) * (STAGE / 2 + 4) / (STAGE / 2 + 5)) + 50;
     }
 

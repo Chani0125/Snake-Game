@@ -3,13 +3,14 @@
 
 struct GameInfo
 {
-    int body_length, num_growth, num_poison, num_gate, item3, item4;
+    short body_len, max_body_len, n_growth, n_poison, n_gate;
 
-    GameInfo(int body_length=3, int num_growth=0, int num_poison=0, int num_gate=0, int item3=0, int item4=0): 
-    body_length(body_length), num_growth(num_growth), num_poison(num_poison), num_gate(num_gate), item3(item3), item4(item4){}
+    GameInfo(short body_len=3, short max_body_len=3, short n_growth=0, short n_poison=0, short n_gate=0)
+    : body_len(body_len), max_body_len(max_body_len), n_growth(n_growth), n_poison(n_poison), n_gate(n_gate) {}
 
-    friend bool operator==(const GameInfo &g1, const GameInfo &g2){
-        return (g1.body_length == g2.body_length) && (g1.num_growth == g2.num_growth) && (g1.num_poison == g2.num_poison) && (g1.num_gate == g2.num_gate) && (g1.item3 == g2.item3) && (g1.item4 == g2.item4);
+    friend bool operator==(const GameInfo &g1, const GameInfo &g2)
+    {
+        return (g1.body_len == g2.body_len) && (g1.max_body_len == g2.max_body_len) && (g1.n_growth == g2.n_growth) && (g1.n_poison == g2.n_poison) && (g1.n_gate == g2.n_gate);
     }
 };
 
