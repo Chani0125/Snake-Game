@@ -52,9 +52,6 @@ int Snake::size() { return body.size(); }
 bool Snake::move(Point next_pos, bool reduce)
 {
     int next_pos_map = play_map[next_pos.x][next_pos.y];
-    
-    // if (next_pos_map == 5)
-    //     return true;
 
     body.insert(body.begin(), next_pos);
 
@@ -85,8 +82,6 @@ bool Snake::move(Point next_pos, bool reduce)
     // Case: Item Poison
     case 7:
         body.pop_back();
-        if (body.size() < 3)
-            is_alive = false;
         break;
     
     // Case: Item Fast Timer
@@ -102,7 +97,10 @@ bool Snake::move(Point next_pos, bool reduce)
     }
 
     Show();
-
+    
+    if (body.size() < 3)
+        is_alive = false;
+    
     return is_alive;
 }
 

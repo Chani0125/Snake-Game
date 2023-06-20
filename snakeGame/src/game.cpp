@@ -144,15 +144,14 @@ Item* makeItem()
 
     Item* ans = nullptr;
 
-    int item_type = rand() % 4;
+    int item_type = rand() % 3;
     switch (item_type)
     {
     case 0:
     case 1:
-    case 2:
         ans = new GrowthItem(*it);
         break;
-    case 3:
+    case 2:
         ans = new PoisonItem(*it);
         break;
     default:
