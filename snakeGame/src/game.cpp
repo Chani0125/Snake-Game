@@ -17,8 +17,8 @@
 using namespace std;
 
 // unit: ms
-// int tick = 500;
-int tick = 300;
+int tick = 500;
+// int tick = 50;
 int num_tick = 0;
 int play_time = 0;
 
@@ -90,7 +90,7 @@ int main()
 
             if (play_gate != nullptr)
             {
-                int gate_check = play_gate->Check(play_snake.GetHead(), play_snake.GetTail());
+                int gate_check = play_gate->Check(play_snake.GetHead(), play_snake.GetTail(), play_snake.Length());
                 if (gate_check == -1)
                 {
                     int dir = play_gate->GetDirection(play_snake.GetDirection());
@@ -99,14 +99,15 @@ int main()
                         GameOver();
                         break;
                     }
-                    mvwprintw(stdscr, 1, 1, "%d", play_gate->in_dir);
                 }
-                else if (gate_check == 0)
+                else if (gate_check == 0 || gate_check == -2)
                 {
                     delete play_gate;
                     play_gate = makeGate();
                 }
-                // play_gate->Show();
+                if (gate_check == -2)
+                    play_snake.Reduce();
+                play_gate->Show();
             }
 
             ScreenUpdate();

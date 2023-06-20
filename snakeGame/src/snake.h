@@ -30,14 +30,16 @@ public:
     int GetDirection();
     bool GetAlive();
     bool GetEatGrowth();
+    int Length();
 
     int size();
 
     bool move();
-    bool move(Point next_pos);
+    bool move(Point next_pos, bool reduce = true);
     bool move(int direction);
     bool move(int dir, Point t_pos);
     
+    void Reduce();
     void Hide();
     void Show();
 };

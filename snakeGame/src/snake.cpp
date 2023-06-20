@@ -34,6 +34,8 @@ Point Snake::GetTail() { return body.back(); }
 
 int Snake::GetDirection() { return direction; }
 
+int Snake::Length() { return body.size(); }
+
 bool Snake::GetAlive() { return is_alive; }
 
 bool Snake::GetEatGrowth() { return is_eat_growth; }
@@ -47,15 +49,18 @@ int Snake::size() { return body.size(); }
  * @return true     Snake is Alive
  * @return false    Snake is Dead
  */
-bool Snake::move(Point next_pos)
+bool Snake::move(Point next_pos, bool reduce)
 {
-    body.insert(body.begin(), next_pos);
-
     int next_pos_map = play_map[next_pos.x][next_pos.y];
+    
+    // if (next_pos_map == 5)
+    //     return true;
+
+    body.insert(body.begin(), next_pos);
 
     Hide();
 
-    if (next_pos_map != 5 && next_pos_map != 6)
+    if (reduce == true && next_pos_map != 6)
     {
         body.pop_back();
     }
@@ -118,7 +123,7 @@ bool Snake::move(int dir)
 bool Snake::move(int dir, Point t_pos)
 {
     direction = dir;
-    return move({t_pos.x+dx[dir], t_pos.y+dy[dir]});
+    return move({t_pos.x+dx[dir], t_pos.y+dy[dir]}, false);
 }
 
 bool Snake::move()
@@ -141,6 +146,13 @@ bool Snake::move()
         break;
     } 
     return move(direction);
+}
+
+void Snake::Reduce()
+{
+    Hide();
+    body.pop_back();
+    Show();
 }
 
 void Snake::Hide()

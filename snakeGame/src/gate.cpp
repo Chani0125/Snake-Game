@@ -24,7 +24,7 @@ Gate::~Gate()
     Hide();
 }
 
-int Gate::Check(Point snake_head_pos, Point snake_tail_pos)
+int Gate::Check(Point snake_head_pos, Point snake_tail_pos, int snake_len)
 {
     int dx[] = {-1, 0, 1, 0};
     int dy[] = {0, 1, 0, -1};
@@ -33,22 +33,22 @@ int Gate::Check(Point snake_head_pos, Point snake_tail_pos)
     {
         if (in_gate_num == 1)
         {
-            if (snake_tail_pos + Point(dx[in_dir], dy[in_dir]) == pos2)
+            if (snake_tail_pos == pos2 + Point(dx[out_dir], dy[out_dir]))
             {
-                return 0;
+                return -2;
             }
         }
         else if (in_gate_num == 2)
         {
-            if (snake_tail_pos + Point(dx[in_dir], dy[in_dir]) == pos1)
+            if (snake_tail_pos == pos1 + Point(dx[out_dir], dy[out_dir]))
             {
-                return 0;
+                return -2;
             }
         }
     }
     else
     {
-        if (snake_head_pos == pos1)
+        if (snake_head_pos  == pos1)
         {
             snake_passing = true;
             in_gate_num = 1;
@@ -88,8 +88,6 @@ int Gate::GetDirection(int snake_dir)
     int dx[] = {-1, 0, 1, 0};
     int dy[] = {0, 1, 0, -1};
 
-    in_dir = snake_dir;
-
     int tmp_map_info;
     if (in_gate_num == 1)
     {
@@ -98,9 +96,11 @@ int Gate::GetDirection(int snake_dir)
             if (0 <= pos2.x+dx[i%4] && pos2.x+dx[i%4] < MAP_H && 0 <= pos2.y+dy[i%4] && pos2.y+dy[i%4] < MAP_W)
             {
                 tmp_map_info = play_map[pos2.x+dx[i%4]][pos2.y+dy[i%4]];
+                if (Point(pos2.x+dx[i%4], pos2.y+dy[i%4]) == pos1)
+                    continue;
                 if (tmp_map_info != 1 && tmp_map_info != 2 && tmp_map_info != 5)
                 {
-                    return i%4;
+                    return (out_dir = i%4);
                 }
             }
         }
@@ -112,9 +112,11 @@ int Gate::GetDirection(int snake_dir)
             if (0 <= pos1.x+dx[i%4] && pos1.x+dx[i%4] < MAP_H && 0 <= pos1.y+dy[i%4] && pos1.y+dy[i%4] < MAP_W)
             {
                 tmp_map_info = play_map[pos1.x+dx[i%4]][pos1.y+dy[i%4]];
+                if (Point(pos1.x+dx[i%4], pos1.y+dy[i%4]) == pos2)
+                    continue;
                 if (tmp_map_info != 1 && tmp_map_info != 2 && tmp_map_info != 5)
                 {
-                    return i%4;
+                    return (out_dir = i%4);
                 }
             }
         }
