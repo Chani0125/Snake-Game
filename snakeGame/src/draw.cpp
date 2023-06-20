@@ -194,6 +194,7 @@ void NextStage()
 
     refresh();
 
+    usleep(tick * 1000);
     while(getch() != KEY_UP);
 }
 
