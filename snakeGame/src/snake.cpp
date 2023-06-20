@@ -30,6 +30,10 @@ Snake::~Snake()
 
 Point Snake::GetHead() { return body.front(); }
 
+Point Snake::GetTail() { return body.back(); }
+
+int Snake::GetDirection() { return direction; }
+
 bool Snake::GetAlive() { return is_alive; }
 
 bool Snake::GetEatGrowth() { return is_eat_growth; }
@@ -51,7 +55,7 @@ bool Snake::move(Point next_pos)
 
     Hide();
 
-    if (next_pos_map != 6)
+    if (next_pos_map != 5 && next_pos_map != 6)
     {
         body.pop_back();
     }
@@ -107,7 +111,14 @@ bool Snake::move(int dir)
         cout << "Don't worry. I fixed it!" << "\n";
         dir %= 4;
     }
+    direction = dir;
     return move({x+dx[dir], y+dy[dir]});
+}
+
+bool Snake::move(int dir, Point t_pos)
+{
+    direction = dir;
+    return move({t_pos.x+dx[dir], t_pos.y+dy[dir]});
 }
 
 bool Snake::move()
