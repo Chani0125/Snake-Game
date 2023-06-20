@@ -42,11 +42,8 @@ int main()
     play_mission = new Mission();
     bool snake_live = true;
 
-    while (true)
+    while (snake_live)
     {   
-        if (!snake_live)
-            break;
-
         if (STAGE == 0)
             CreateMap(0);
         else
@@ -123,12 +120,13 @@ int main()
 
             if (play_mission->isCleared())
             {
+                snake_live = true;
                 NextStage();
                 play_time += tick;
                 num_tick++;
                 break;
             }
-
+        
             ScreenUpdate();
             usleep(tick * 1000);
             play_time += tick;
