@@ -36,8 +36,8 @@ int main()
 
     // TestGame();
 
-    // StartScreen();
-    // LoadingScreen();
+    StartScreen();
+    LoadingScreen();
     
     play_mission = new Mission();
     bool snake_live = true;
