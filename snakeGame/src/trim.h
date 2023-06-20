@@ -24,7 +24,6 @@ inline std::string& trim(std::string& s, const char* t = " \t\n\r\f\v")
 }
 
 // copying versions
-
 inline std::string ltrim_copy(std::string s, const char* t = " \t\n\r\f\v")
 {
     return ltrim(s, t);
