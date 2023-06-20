@@ -126,7 +126,7 @@ int main()
                 NextStage();
                 play_time += tick;
                 num_tick++;
-                continue;
+                break;
             }
 
             ScreenUpdate();
