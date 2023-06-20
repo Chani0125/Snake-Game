@@ -26,8 +26,8 @@ void Mission::SetMission()
     random_device rd;
     mt19937 gen(rd());
 
-    binomial_distribution<int> b_body_len(STAGE + 6, 0.2);
-    binomial_distribution<int> b_n_growth(STAGE + 8, 0.3);
+    binomial_distribution<int> b_body_len(STAGE + 8, 0.2);
+    binomial_distribution<int> b_n_growth(STAGE + 6, 0.3);
     binomial_distribution<int> b_n_poison(STAGE + 4, 0.2);
     binomial_distribution<int> b_n_gate  (STAGE + 2, 0.2);
 

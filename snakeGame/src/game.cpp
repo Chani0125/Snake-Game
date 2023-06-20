@@ -44,8 +44,8 @@ int main()
 
     while (true)
     {   
-        // if (!snake_live)
-        //     break;
+        if (!snake_live)
+            break;
 
         if (STAGE == 0)
             CreateMap(0);
